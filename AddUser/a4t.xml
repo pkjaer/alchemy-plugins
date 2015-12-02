@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<plugin xmlns:c="http://www.alchemywebstore.com/configuration/definitions" xmlns="http://www.alchemywebstore.com/">
+  <name>Add_User_By_Name</name>
+  <description><![CDATA[Allows quickly adding a new user based on their domain username.]]></description>
+</plugin>
