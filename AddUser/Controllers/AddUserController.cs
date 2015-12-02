@@ -6,8 +6,8 @@ namespace Alchemy.Plugins.AddUser.Controllers
 {
     public class UserInfoModel
     {
-        public string Name;
-        public string Description;
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 
     [AlchemyRoutePrefix("AddUserService")]
