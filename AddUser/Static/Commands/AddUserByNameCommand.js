@@ -1,42 +1,63 @@
 ﻿Alchemy.command("${PluginName}", "AddUserByName", 
 {
+	resources: 
+	{
+		addingUser: "Adding user",
+		addedUser: "User added."
+	},
+
 	execute: function()
 	{
+		var p = this.properties;
 		var url = "${ViewsUrl}AddUserPopup.aspx";
 		var parameters = { width: 400, height: 210 };
 		var args = { popupType: Tridion.Controls.PopupManager.Type.MODAL_IFRAME };
 
-		var popup = $popup.create(url, parameters, args);
+		p.popup = $popup.create(url, parameters, args);
+		$evt.addEventHandler(p.popup, "confirm", this.getDelegate(this.onConfirm));
+		$evt.addEventHandler(p.popup, "close", this.getDelegate(this.closePopup));
+		p.popup.open();
+	},
 
-		var confirm = function(event)
-		{
-			$evt.removeEventHandler(popup, "confirm", confirm);
+	onConfirm : function(event)
+	{
+		var p = this.properties;
+		var self = this;
+		var service = Alchemy.Plugins["${PluginName}"].Api.AddUserService;
+		var username = event.data.username;
+		var fullName = event.data.fullName;
 
-			var service = Alchemy.Plugins["${PluginName}"].Api.AddUserService;
-			var username = event.data.username;
-			var fullName = event.data.fullName;
+		$evt.removeEventHandler(p.popup, "confirm", this.getDelegate(this.onConfirm));
 
-			service.newUser({Name: username, Description: fullName})
-				.success(function(response) {
-					console.log("Added new user: ", response);
-				})
-				.error(function(response) {
-					$message.registerError(response);
-				})
-				.complete(function() {
-					closePopup();
-				});
-		};
+		var progress = $messages.registerProgress(this.resources.addingUser);
+		progress.setOnSuccessMessage(this.resources.addedUser, fullName + " (" + username + ")");
 
-		var closePopup = function()
-		{
-			$evt.removeEventHandler(popup, "close", closePopup);
-			popup.close();
-		};
+		service.newUser({name: username, description: fullName})
+			.success(function(response) {
+				progress.finish({success: true});
+				self.updateList(response);
+			})
+			.error(function(response) {
+				progress.finish({success: false});
+				$messages.registerError(response);
+			})
+			.complete(function() {
+				self.closePopup();
+			});
+	},
 
-		$evt.addEventHandler(popup, "confirm", confirm);
-		$evt.addEventHandler(popup, "close", closePopup);
+	closePopup : function()
+	{
+		var popup = this.properties.popup;
+		$evt.removeEventHandler(popup, "close", this.getDelegate(this.closePopup));
+		popup.close();
+		this.properties.popup = null;
+	},
 
-		popup.open();
+	updateList : function(userId)
+	{
+		var systemRoot = $models.getItem($const.TCMROOT);
+		var list = systemRoot.getListUsers(null, false, false);
+		if (list) list.unload();
 	}
 });
