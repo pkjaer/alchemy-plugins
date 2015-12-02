@@ -25,6 +25,7 @@ namespace Alchemy.Plugins.AddUser.Controllers
             var defaultReadOptions = new ReadOptions();
             var user = (UserData)Client.GetDefaultData(ItemType.User, null, defaultReadOptions);
             user.Title = data.Name;
+            user.Description = data.Name;
 
             if (!string.IsNullOrWhiteSpace(data.Description))
             {
