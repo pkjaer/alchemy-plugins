@@ -16,16 +16,14 @@
 			var username = event.data.username;
 			var fullName = event.data.fullName;
 
-			console.log("Adding user: ", { name: username, description: fullName });
-			service.newUser(username, fullName)
+			service.newUser({Name: username, Description: fullName})
 				.success(function(response) {
 					console.log("Added new user: ", response);
 				})
 				.error(function(response) {
-					console.log("Error!", response);
+					$message.registerError(response);
 				})
 				.complete(function() {
-					console.log("Completed.");
 					closePopup();
 				});
 		};
