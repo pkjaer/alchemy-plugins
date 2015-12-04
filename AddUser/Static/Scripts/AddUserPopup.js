@@ -14,15 +14,18 @@ Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.initialize = function AddUs
 	p.username = $("#Username");
 	p.fullName = $("#FullName");
 	p.usernameRequiredError = $("#UserNameRequiredError");
+	p.openAfterwards = $("#OpenAfterwards");
 
 	c.cancelButton = $controls.getControl($("#CancelButton"), "Tridion.Controls.Button");
-	c.okButton = $controls.getControl($("#OkButton"), "Tridion.Controls.Button");
+	c.saveButton = $controls.getControl($("#SaveButton"), "Tridion.Controls.Button");
 
     this.callBase("Tridion.Cme.View", "initialize");
 
     $evt.addEventHandler(c.cancelButton, "click", this.getDelegate(this.onCancelClicked));
-    $evt.addEventHandler(c.okButton, "click", this.getDelegate(this.onOkClicked));
+    $evt.addEventHandler(c.saveButton, "click", this.getDelegate(this.onSaveClicked));
 	$evt.addEventHandler(document, "keyup", this.getDelegate(this.onKeyUp));
+	$evt.addEventHandler(p.username, "change", this.getDelegate(this.onUserNameChanged));
+	$evt.addEventHandler(p.username, "keyup", this.getDelegate(this.onUserNameChanged));
 
 	p.username.focus();
 };
@@ -32,16 +35,21 @@ Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.close = function AddUserPop
 	this.fireEvent("close");
 };
 
-Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.confirm = function AddUserPopup$close()
+Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.confirm = function AddUserPopup$confirm(openUserAfterwards)
 {
 	var p = this.properties;
+	var c = p.controls;
+
 	if (!p.username.value)
 	{
 		$css.display(p.usernameRequiredError);
 		return;
 	}
 
-	this.fireEvent("confirm", { username: p.username.value, fullName: p.fullName.value });
+	c.cancelButton.disable();
+	c.saveButton.disable();
+
+	this.fireEvent("confirm", { username: p.username.value, fullName: p.fullName.value, openAfterwards: p.openAfterwards.checked });
 };
 
 Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.onKeyUp = function AddUserPopup$onKeyUp(event)
@@ -55,12 +63,25 @@ Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.onKeyUp = function AddUserP
 	}
 };
 
+Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.onUserNameChanged = function AddUserPopup$onUserNameChanged(event)
+{
+	var p = this.properties;
+	if (p.username.value)
+	{
+		$css.undisplay(p.usernameRequiredError);
+	} 
+	else
+	{
+		$css.display(p.usernameRequiredError);
+	}
+};
+
 Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.onCancelClicked = function AddUserPopup$onCancelClicked(event)
 {
 	this.close();
 };
 
-Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.onOkClicked = function AddUserPopup$onOkClicked(event)
+Alchemy.Plugins.AddUser.Views.AddUserPopup.prototype.onSaveClicked = function AddUserPopup$onSaveClicked(event)
 {
 	this.confirm();
 };

@@ -28,17 +28,17 @@ h1
     color: red;
 }
 
+.checkboxes > *
+{
+    vertical-align: middle;
+}
+
 .buttons
 {
     position: absolute;
     bottom: 15px;
     right: 15px;
-    width: 230px;
-}
-
-.buttons .button
-{
-    margin-left: 10px;
+    float: right;
 }
 
 .error

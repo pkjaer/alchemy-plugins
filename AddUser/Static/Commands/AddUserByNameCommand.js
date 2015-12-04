@@ -29,34 +29,40 @@
 		p.popup.open();
 	},
 
-	onConfirm : function(event)
+	onConfirm: function(event)
 	{
 		var p = this.properties;
 		var self = this;
 		var service = Alchemy.Plugins["${PluginName}"].Api.AddUserService;
 		var username = event.data.username;
 		var fullName = event.data.fullName;
+		var openAfterwards = event.data.openAfterwards;
 
 		$evt.removeEventHandler(p.popup, "confirm", this.getDelegate(this.onConfirm));
+
+		this.closePopup();
 
 		var progress = $messages.registerProgress(this.resources.addingUser);
 		progress.setOnSuccessMessage(this.resources.addedUser, fullName + " (" + username + ")");
 
-		service.newUser({name: username, description: fullName})
-			.success(function(response) {
-				progress.finish({success: true});
-				self.updateList(response);
+		service.newUser({ name: username, description: fullName })
+			.success(function(userId) 
+			{
+				progress.finish({ success: true });
+				self.updateList();
+				if (openAfterwards)
+				{
+					self.openUser(userId);
+				}
 			})
-			.error(function(errorType, error) {
-				progress.finish({success: false});
+			.error(function(errorType, error) 
+			{
+				progress.finish({ success: false });
 				$messages.registerError(error.message);
-			})
-			.complete(function() {
-				self.closePopup();
 			});
 	},
 
-	closePopup : function()
+	closePopup: function()
 	{
 		var popup = this.properties.popup;
 		$evt.removeEventHandler(popup, "close", this.getDelegate(this.closePopup));
@@ -64,10 +70,17 @@
 		this.properties.popup = null;
 	},
 
-	updateList : function(userId)
+	updateList: function()
 	{
 		var systemRoot = $models.getItem($const.TCMROOT);
 		var list = systemRoot.getListUsers(null, false, false);
 		if (list) list.unload();
+	},
+
+	openUser: function(userId)
+	{
+		var selection = new Tridion.Cme.Selection();
+		selection.addItem(userId);
+		$commands.executeCommand("Open", selection);
 	}
 });

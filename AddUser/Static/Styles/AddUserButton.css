@@ -2,10 +2,10 @@
 /* main icon in full ribbon mode */
 .ribbontoolbar #AddUserByName.button .image, .ribbontoolbar #AddUserByName.button .image
 {
-background-image: url('${ImgUrl}new-user.32x32.png');
+    background-image: url('${ImgUrl}new-user.32x32.png');
 }
 /* main icon in minimized ribbon mode */
 .ribbontoolbar.minimized #AddUserByName.button .image, .ribbontoolbar.minimized #AddUserByName.button .image
 {
-background-image: url('${ImgUrl}new-user.16x16.png');
+    background-image: url('${ImgUrl}new-user.16x16.png');
 }
