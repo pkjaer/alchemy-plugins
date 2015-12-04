@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Static\Commands\AddUserByNameCommand.js" />
-    <Content Include="Static\Controls\AddUserContextMenu.css" />
+    <Content Include="Static\Styles\AddUserContextMenu.css" />
     <Content Include="Static\Images\new-user.16x16.png" />
     <Content Include="Static\Images\new-user.24x24.png" />
     <Content Include="Static\Images\new-user.32x32.png" />

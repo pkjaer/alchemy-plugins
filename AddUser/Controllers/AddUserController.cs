@@ -1,4 +1,7 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using Alchemy4Tridion.Plugins;
 using Tridion.ContentManager.CoreService.Client;
 
@@ -22,17 +25,24 @@ namespace Alchemy.Plugins.AddUser.Controllers
                 return BadRequest("Name is required.");
             }
 
-            var defaultReadOptions = new ReadOptions();
-            var user = (UserData)Client.GetDefaultData(ItemType.User, null, defaultReadOptions);
-            user.Title = data.Name;
-            user.Description = data.Name;
-
-            if (!string.IsNullOrWhiteSpace(data.Description))
+            try
             {
-                user.Description = data.Description;
-            }
+                var defaultReadOptions = new ReadOptions();
+                var user = (UserData)Client.GetDefaultData(ItemType.User, null, defaultReadOptions);
+                user.Title = data.Name;
+                user.Description = data.Name;
 
-            return Ok(Client.Create(user, defaultReadOptions).Id);
+                if (!string.IsNullOrWhiteSpace(data.Description))
+                {
+                    user.Description = data.Description;
+                }
+
+                return Ok(Client.Create(user, defaultReadOptions).Id);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
         }
     }
 }

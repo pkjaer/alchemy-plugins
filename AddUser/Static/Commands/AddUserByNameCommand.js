@@ -6,6 +6,16 @@
 		addedUser: "User added."
 	},
 
+	isAvailable: function(selection, pipeline)
+	{
+		return $commands.getCommand("NewUser").isAvailable(selection, pipeline);
+	},
+
+	isEnabled: function(selection, pipeline)
+	{
+		return $commands.getCommand("NewUser").isEnabled(selection, pipeline);
+	},
+
 	execute: function()
 	{
 		var p = this.properties;
@@ -37,9 +47,9 @@
 				progress.finish({success: true});
 				self.updateList(response);
 			})
-			.error(function(response) {
+			.error(function(errorType, error) {
 				progress.finish({success: false});
-				$messages.registerError(response);
+				$messages.registerError(error.message);
 			})
 			.complete(function() {
 				self.closePopup();
