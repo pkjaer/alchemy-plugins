@@ -1,0 +1,4 @@
+﻿.contextmenu .item.AddUserByName .image
+{
+    background-image: url(${ImgUrl}new-user.16x16.png);
+}

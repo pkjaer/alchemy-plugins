@@ -8,6 +8,7 @@ namespace Alchemy.Plugins.AddUser.Config
         {
             AddFile("AddUserByNameCommand.js");
             AddFile("AddUserButton.css");
+            AddFile("AddUserContextMenu.css");
             AddFile<AddUserCommandSet>();
             AddWebApiProxy();
             Dependencies.AddAlchemyCore();

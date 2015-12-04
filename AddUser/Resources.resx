@@ -120,6 +120,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="ContextMenuEntry" xml:space="preserve">
+    <value>User By Name</value>
+  </data>
   <data name="FullNameLabel" xml:space="preserve">
     <value>Full name:</value>
   </data>

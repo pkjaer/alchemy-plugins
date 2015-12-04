@@ -70,6 +70,15 @@ namespace Alchemy.Plugins.AddUser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User By Name.
+        /// </summary>
+        internal static string ContextMenuEntry {
+            get {
+                return ResourceManager.GetString("ContextMenuEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full name:.
         /// </summary>
         internal static string FullNameLabel {
