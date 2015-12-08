@@ -138,9 +138,6 @@
   <data name="ToolbarButtonTooltip" xml:space="preserve">
     <value>Create a new user quickly by entering his or her username.</value>
   </data>
-  <data name="ToolbarGroup" xml:space="preserve">
-    <value>PowerTools</value>
-  </data>
   <data name="UsernameLabel" xml:space="preserve">
     <value>Username (including domain):</value>
   </data>

@@ -124,15 +124,6 @@ namespace Alchemy.Plugins.AddUser {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PowerTools.
-        /// </summary>
-        internal static string ToolbarGroup {
-            get {
-                return ResourceManager.GetString("ToolbarGroup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Username (including domain):.
         /// </summary>
         internal static string UsernameLabel {
