@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddUser", "AddUser\AddUser.csproj", "{B4404A90-558F-4FAB-B472-B36DADDAB0F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountItems", "CountItems\CountItems.csproj", "{CD77B849-B127-4AFC-845A-49E6F1BC6F41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B4404A90-558F-4FAB-B472-B36DADDAB0F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4404A90-558F-4FAB-B472-B36DADDAB0F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4404A90-558F-4FAB-B472-B36DADDAB0F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD77B849-B127-4AFC-845A-49E6F1BC6F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD77B849-B127-4AFC-845A-49E6F1BC6F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD77B849-B127-4AFC-845A-49E6F1BC6F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD77B849-B127-4AFC-845A-49E6F1BC6F41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<plugin xmlns:c="http://www.alchemywebstore.com/configuration/definitions" xmlns="http://www.alchemywebstore.com/">
+  <name>Count_Items</name>
+  <description><![CDATA[Counts the number of items in a given organization item, breaking them down by item type.]]></description>
+  <settings />
+</plugin>
