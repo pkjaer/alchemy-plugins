@@ -1,4 +1,6 @@
-﻿using Alchemy4Tridion.Plugins;
+﻿using System.Net;
+using System.Net.Http;
+using Alchemy4Tridion.Plugins;
 using System;
 using System.Web.Http;
 using System.Xml.Linq;
@@ -15,14 +17,23 @@ namespace Alchemy.Plugins.CountItems.Controllers
         [Route("GetCount")]
         public ItemCountResult GetCount(GetCountParameters parameters)
         {
-            if (parameters == null || parameters.OrganizationalItemId == null)
+            try
             {
-                throw new ArgumentNullException("parameters");
-            }
+                if (parameters == null || parameters.OrganizationalItemId == null)
+                {
+                    throw new ArgumentNullException("parameters");
+                }
 
-            ItemsFilterData filter = GetFilter(parameters);
-            XElement listXml = Client.GetListXml(parameters.OrganizationalItemId, filter);
-            return ProcessCounts(listXml);
+                DateTime start = DateTime.Now;
+                ItemsFilterData filter = GetFilter(parameters);
+                XElement listXml = Client.GetListXml(parameters.OrganizationalItemId, filter);
+
+                return ProcessCounts(listXml, start);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message));
+            }
         }
 
         private static int CountItemsOfType(XElement listXml, int itemType)
@@ -41,11 +52,7 @@ namespace Alchemy.Plugins.CountItems.Controllers
             return nodes.Count();
         }
 
-        /// <summary>
-        /// Extract the actual counts from the XML.
-        /// Set the response _countItemsData object.
-        /// </summary>
-        private ItemCountResult ProcessCounts(XElement listXml)
+        private static ItemCountResult ProcessCounts(XElement listXml, DateTime startTime)
         {
             if (listXml == null)
             {
@@ -63,15 +70,11 @@ namespace Alchemy.Plugins.CountItems.Controllers
                 StructureGroups = CountItemsOfType(listXml, 4),
                 Pages = CountItemsOfType(listXml, 64),
                 Categories = CountItemsOfType(listXml, 512),
-                Keywords = CountItemsOfType(listXml, 1024)
+                Keywords = CountItemsOfType(listXml, 1024),
+                TimeTaken = (DateTime.Now - startTime).Milliseconds
             };
         }
 
-        /// <summary>
-        /// Create an ItemsFilter for the given Organizational Item type by either instantiating a
-        /// RepositoryItemsFilterData (for Publication) or OrganizationalItemItemsFilterData (for Folder or SG).
-        /// Populates the ItemTypes property with only the types that were requested to improve performance.
-        /// </summary>
         private static ItemsFilterData GetFilter(GetCountParameters parameters)
         {
             ItemsFilterData filter;
@@ -99,7 +102,6 @@ namespace Alchemy.Plugins.CountItems.Controllers
             if (parameters.CountKeywords) { itemTypesList.Add(ItemType.Keyword); }
 
             filter.ItemTypes = itemTypesList.ToArray();
-
             return filter;
         }
     }

@@ -1,0 +1,114 @@
+﻿.content
+{
+    margin: 10px;
+    font-family: Verdana;
+    font-size: 11px;
+}
+
+h1
+{
+    min-height: 24px;
+    font-size: 16px;
+    color: #2972cc;
+}
+
+.header
+{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.options .option > *
+{
+    vertical-align: middle;
+}
+
+.buttons
+{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    float: right;
+}
+
+.results
+{
+    margin-top: 10px;
+}
+
+.error
+{
+    color: red;
+    margin-top: 10px;
+}
+
+.CountItemsPopup .content .options .option
+{
+    min-width: 36px;
+    min-height: 36px;
+    margin-right: 3px;
+}
+
+.CountItemsPopup .content .options .option .image
+{
+    width: 32px;
+    height: 32px;
+    position: relative;
+    left: 2px;
+    top: 2px;
+    background-color: #E2E2E2;
+}
+
+.CountItemsPopup .content .options .option .image.on
+{
+    background-color: #aaa;
+}
+.CountCategories .image 
+{
+    background-image: url(${ImgUrl}category.32x32.png);
+}
+
+.CountComponentTemplates .image 
+{
+    background-image: url(${ImgUrl}component-template.32x32.png);
+}
+
+.CountComponents .image 
+{
+    background-image: url(${ImgUrl}component.32x32.png);
+}
+
+.CountFolders .image
+{
+    background-image: url(${ImgUrl}folder.32x32.png);
+}
+
+.CountKeywords .image
+{
+    background-image: url(${ImgUrl}keyword.32x32.png);
+}
+
+.CountPageTemplates .image
+{
+    background-image: url(${ImgUrl}page-template.32x32.png);
+}
+
+.CountPages .image
+{
+    background-image: url(${ImgUrl}page.32x32.png);
+}
+
+.CountSchemas .image
+{
+    background-image: url(${ImgUrl}schema.32x32.png);
+}
+
+.CountStructureGroups .image
+{
+    background-image: url(${ImgUrl}structure-group.32x32.png);
+}
+
+.CountTemplateBuildingBlocks .image
+{
+    background-image: url(${ImgUrl}template-building-block.32x32.png);
+}

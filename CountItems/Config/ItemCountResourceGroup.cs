@@ -8,7 +8,6 @@ namespace Alchemy.Plugins.CountItems.Config
         {
             AddFile("CountItems.js");
             AddFile<ItemCountCommandSet>();
-            AddWebApiProxy();
             Dependencies.AddAlchemyCore();
         }
     }

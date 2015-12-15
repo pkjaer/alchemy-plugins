@@ -27,29 +27,26 @@
     execute : function(selection) 
 	{
 		var p = this.properties;
-        p.progress = $messages.registerProgress("Counting items...", null);
+		var url = "${ViewsUrl}CountItemsPopup.aspx#selectedItem=" + this._getSelectedItem(selection);
+		var parameters = "width=432px, height=440px";
+		var args = { popupType: Tridion.Controls.PopupManager.Type.EXTERNAL };
 
-		var params = {
-			OrganizationalItemId : this._getSelectedItem(selection),
-			CountFolders : true,
-			CountComponents : true,
-			CountSchemas : true,
-			CountComponentTemplates : true,
-			CountPageTemplates : true,
-			CountTemplateBuildingBlocks : true,
-			CountStructureGroups : true,
-			CountPages : true,
-			CountCategories : true,
-			CountKeywords : true
-		};
-
-        Alchemy.Plugins["${PluginName}"].Api.CountItemsService.getCount(params)
-			.success(this.getDelegate(this._onSuccess))
-			.error(this.getDelegate(this._onError)
-		);
+		p.popup = $popupManager.createExternalContentPopup(url, parameters, args);
+		$evt.addEventHandler(p.popup, "close", this.getDelegate(this.closePopup));
+		p.popup.open();
     },
 
-	_getSelectedItem : function(selection)
+	closePopup : function()
+	{
+		var p = this.properties;
+		if (p.popup)
+		{
+			p.popup.close();
+			p.popup = null;
+		}
+	},
+
+    _getSelectedItem : function(selection)
 	{
 		$assert.isObject(selection);
 
@@ -63,32 +60,5 @@
 			default:
 				return null;
 		}
-	},
-
-	_onSuccess : function(result)
-	{
-		var p = this.properties;
-		var lines = [];
-		lines.push("Categories: " + result.categories);
-		lines.push("Components: " + result.components);
-		lines.push("Component Templates: " + result.componentTemplates);
-		lines.push("Folders: " + result.folders);
-		lines.push("Keywords: " + result.keywords);
-		lines.push("Pages: " + result.pages);
-		lines.push("Page Templates: " + result.pageTemplates);
-		lines.push("Schemas: " + result.schemas);
-		lines.push("Structure Groups: " + result.structureGroups);
-		lines.push("TBBs: " + result.templateBuildingBlocks);
-
-		p.progress.setOnSuccessMessage("Count complete", lines.join("\n"));
-		p.progress.finish({success : true});
-		console.log("Count result: ", lines.join("\n"));
-	},
-
-	_onError : function(type, error)
-	{
-		var p = this.properties;
-		p.progress.finish({success : false});
-		$messages.registerError("Counting of items failed", error.message);
 	},
 });

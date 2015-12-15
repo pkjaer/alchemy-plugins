@@ -6,7 +6,7 @@ namespace Alchemy.Plugins.CountItems.Config
     {
         public ItemCountCommandSet()
         {
-            this.AddCommand("CountItems");
+            AddCommand("CountItems");
         }
     }
 }
