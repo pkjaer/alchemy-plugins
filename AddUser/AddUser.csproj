@@ -43,12 +43,7 @@
       <HintPath>..\packages\Alchemy4Tridion.Plugin.1.0.0-beta7-0\lib\net40\Alchemy4Tridion.Plugins.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -62,10 +57,6 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Tridion.ContentManager.CoreService.Client, Version=7.1.0.1290, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
       <HintPath>..\packages\Alchemy4Tridion.Plugin.1.0.0-beta7-0\lib\net40\Tridion.ContentManager.CoreService.Client.dll</HintPath>
@@ -88,7 +79,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="a4t.xml" />
+    <Content Include="a4t.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Static\Commands\AddUserByNameCommand.js" />
     <Content Include="Static\Styles\AddUserContextMenu.css" />
     <Content Include="Static\Images\new-user.16x16.png" />
