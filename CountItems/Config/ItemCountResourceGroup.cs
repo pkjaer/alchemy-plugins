@@ -7,6 +7,8 @@ namespace Alchemy.Plugins.CountItems.Config
         public ItemCountResourceGroup()
         {
             AddFile("CountItems.js");
+            AddFile("CountItemsButton.css");
+            AddFile("CountItemsContextMenu.css");
             AddFile<ItemCountCommandSet>();
             Dependencies.AddAlchemyCore();
         }

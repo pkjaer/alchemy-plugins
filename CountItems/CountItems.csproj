@@ -75,6 +75,8 @@
     <Content Include="Static\Images\category.32x32.png" />
     <Content Include="Static\Images\component-template.32x32.png" />
     <Content Include="Static\Images\component.32x32.png" />
+    <Content Include="Static\Images\count-items.16x16.png" />
+    <Content Include="Static\Images\count-items.32x32.png" />
     <Content Include="Static\Images\folder.32x32.png" />
     <Content Include="Static\Images\keyword.32x32.png" />
     <Content Include="Static\Images\page-template.32x32.png" />
@@ -83,12 +85,16 @@
     <Content Include="Static\Images\structure-group.32x32.png" />
     <Content Include="Static\Images\template-building-block.32x32.png" />
     <Content Include="Static\Scripts\CountItemsPopup.js" />
+    <Content Include="Static\Styles\CountItemsButton.css" />
+    <Content Include="Static\Styles\CountItemsContextMenu.css" />
     <Content Include="Static\Styles\CountItemsPopup.css" />
     <Content Include="Static\Views\CountItemsPopup.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlchemyPlugin.cs" />
+    <Compile Include="Config\CountItemsToolbarButton.cs" />
+    <Compile Include="Config\ClientSettings.cs" />
     <Compile Include="Config\CountItemsPopupGroup.cs" />
     <Compile Include="Config\ContextMenuOption.cs" />
     <Compile Include="Config\ItemCountCommandSet.cs" />

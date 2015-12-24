@@ -10,9 +10,11 @@ Alchemy.Plugins.CountItems.Views.CountItemsPopup.prototype.initialize = function
 {
 	var p = this.properties;
     var c = p.controls;
+	var self = this;
 
 	// TODO: Find out how to add client resources in Alchemy, so we can use $localization.getResource(..)
 	p.resources = {
+		"WindowTitle": "Count Items",
 		"DefaultResultLabel": "Press Count to calculate the number of items.",
 		"Counting": "Counting...",
 		"CountingFailed": "Counting of items failed: ",
@@ -27,7 +29,8 @@ Alchemy.Plugins.CountItems.Views.CountItemsPopup.prototype.initialize = function
 		"LabelStructureGroups": "Structure Groups",
 		"LabelPages": "Pages",
 		"LabelCategories": "Categories",
-		"LabelKeywords": "Keywords"
+		"LabelKeywords": "Keywords",
+		"Results": "Results"
 	};
 
 	p.selectedItem = $url.getHashParam("selectedItem");
@@ -39,13 +42,18 @@ Alchemy.Plugins.CountItems.Views.CountItemsPopup.prototype.initialize = function
 
 	$dom.setInnerText(p.results, p.resources.DefaultResultLabel);
 
+	c.countButton = $controls.getControl($("#CountButton"), "Tridion.Controls.Button");
+	c.countButton.disable();
+    $evt.addEventHandler(c.countButton, "click", this.getDelegate(this.onCountClicked));
+	$evt.addEventHandler(document, "keyup", this.getDelegate(this.onKeyUp));
+
 	switch (p.selectedItemType)
 	{
 		case $const.ItemType.FOLDER:
-			this.addOptions(["Folders", "Components", "Schemas", "ComponentTemplates", "PageTemplates", "TemplateBuildingBlocks"]);
+			this.addOptions(["Folders", "Schemas", "Components", "ComponentTemplates", "PageTemplates", "TemplateBuildingBlocks"]);
 			break;
 		case $const.ItemType.PUBLICATION:
-			this.addOptions(["Folders", "Components", "Schemas", "ComponentTemplates","PageTemplates", "TemplateBuildingBlocks", "StructureGroups", "Pages", "Categories", "Keywords"]);
+			this.addOptions(["Folders", "Schemas", "Components", "ComponentTemplates","PageTemplates", "TemplateBuildingBlocks", "StructureGroups", "Pages", "Categories", "Keywords"]);
 			break;
 		case $const.ItemType.STRUCTURE_GROUP:
 			this.addOptions(["StructureGroups", "Pages"]);
@@ -54,16 +62,25 @@ Alchemy.Plugins.CountItems.Views.CountItemsPopup.prototype.initialize = function
 			this.addOptions(["Categories", "Keywords"]);
 			break;
 		case $const.ItemType.CATMAN:
-			p.selectedItem = p.selectedItem.substr(7); // Change to look in the Publication as "Categories and Keywords" isn't a real item
+			p.selectedItem = p.selectedItem.substr(7); // Change it to look in the Publication as "Categories and Keywords" isn't a real item
 			this.addOptions(["Categories", "Keywords"]);
 			break;
 	}
 
 	this.displayOptions();
 
-	c.countButton = $controls.getControl($("#CountButton"), "Tridion.Controls.Button");
-    $evt.addEventHandler(c.countButton, "click", this.getDelegate(this.onCountClicked));
-	$evt.addEventHandler(document, "keyup", this.getDelegate(this.onKeyUp));
+	Alchemy.Plugins["${PluginName}"].Api.getSettings()
+		.success(function (settings) {
+			if (settings && settings.startCountingImmediately == true)
+			{
+				self.confirm();
+			}
+		})
+		.complete(function() {
+			c.countButton.enable();
+		});
+
+	this.showItemTitle();
 
     this.callBase("Tridion.Cme.View", "initialize");
 };
@@ -186,13 +203,37 @@ Alchemy.Plugins.CountItems.Views.CountItemsPopup.prototype.camelCase = function 
 	return text.substr(0, 1).toLowerCase() + text.substr(1);
 };
 
+Alchemy.Plugins.CountItems.Views.CountItemsPopup.prototype.showItemTitle = function CountItemsPopup$showItemTitle()
+{
+	var p = this.properties;
+	var title = p.resources.WindowTitle;
+
+	if (p.selectedItem)
+	{
+		var item = $models.getItem(p.selectedItem);
+		if (item)
+		{
+			title += " - " + item.getStaticTitle();
+		}
+	}
+
+	window.title = document.title = title;
+	$dom.setInnerText($("#TitleHeader"), title);
+};
+
 Alchemy.Plugins.CountItems.Views.CountItemsPopup.prototype._onSuccess = function CountItemsPopup$_onSuccess(result)
 {
 	var p = this.properties;
 	var c = p.controls;
 
 	p.results.innerHTML = "";
-	debugger;
+
+	var header = document.createElement("h3");
+	$dom.setInnerText(header, p.resources.Results);
+	p.results.appendChild(header);
+
+	var table = document.createElement("table");
+	p.results.appendChild(table);
 
 	for (var key in p.options)
 	{
@@ -200,10 +241,18 @@ Alchemy.Plugins.CountItems.Views.CountItemsPopup.prototype._onSuccess = function
 		if (option.button && option.button.isOn())
 		{
 			var count = result[option.resultKey];
-			var entry = document.createElement("div");
-			entry.className = "result " + option.requestKey;
-			$dom.setInnerText(entry, count.toLocaleString() + " " + option.label);
-			p.results.appendChild(entry);
+			var row = document.createElement("tr");
+			row.className = "result " + option.requestKey;
+			table.appendChild(row);
+
+			var cell = document.createElement("td");
+			$dom.setInnerText(cell, option.label);
+			row.appendChild(cell);
+
+			cell = document.createElement("td");
+			cell.className = "count";
+			$dom.setInnerText(cell, count);
+			row.appendChild(cell);
 		}
 	}
 

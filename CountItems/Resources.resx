@@ -120,4 +120,10 @@
   <data name="ContextMenuEntry" xml:space="preserve">
     <value>Count items</value>
   </data>
+  <data name="ToolbarButtonName" xml:space="preserve">
+    <value>Count items</value>
+  </data>
+  <data name="ToolbarButtonTooltip" xml:space="preserve">
+    <value>Counts the number of items within the selected organizational item.</value>
+  </data>
 </root>

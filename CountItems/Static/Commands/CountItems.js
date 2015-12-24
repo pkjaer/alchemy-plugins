@@ -27,8 +27,10 @@
     execute : function(selection) 
 	{
 		var p = this.properties;
-		var url = "${ViewsUrl}CountItemsPopup.aspx#selectedItem=" + this._getSelectedItem(selection);
-		var parameters = "width=432px, height=440px";
+		var selectedItem = this._getSelectedItem(selection);
+		var url = "${ViewsUrl}CountItemsPopup.aspx#selectedItem=" + selectedItem;
+		var height = this._getPopupHeight(selectedItem);
+		var parameters = "width=432px, height=" + height + "px";
 		var args = { popupType: Tridion.Controls.PopupManager.Type.EXTERNAL };
 
 		p.popup = $popupManager.createExternalContentPopup(url, parameters, args);
@@ -45,6 +47,19 @@
 			p.popup = null;
 		}
 	},
+
+	_getPopupHeight : function(selectedItem)
+	{
+	    switch ($models.getItemType(selectedItem))
+		{
+			case $const.ItemType.FOLDER:
+				return 390;
+			case $const.ItemType.PUBLICATION:
+				return 490;
+		}
+
+		return 270;
+    },
 
     _getSelectedItem : function(selection)
 	{

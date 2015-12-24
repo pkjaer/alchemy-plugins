@@ -68,5 +68,23 @@ namespace Alchemy.Plugins.CountItems {
                 return ResourceManager.GetString("ContextMenuEntry", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count items.
+        /// </summary>
+        internal static string ToolbarButtonName {
+            get {
+                return ResourceManager.GetString("ToolbarButtonName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Counts the number of items within the selected organizational item..
+        /// </summary>
+        internal static string ToolbarButtonTooltip {
+            get {
+                return ResourceManager.GetString("ToolbarButtonTooltip", resourceCulture);
+            }
+        }
     }
 }

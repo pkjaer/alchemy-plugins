@@ -1,0 +1,11 @@
+﻿
+/* main icon in full ribbon mode */
+.ribbontoolbar #CountItems.button .image, .ribbontoolbar #CountItems.button .image
+{
+    background-image: url('${ImgUrl}count-items.32x32.png');
+}
+/* main icon in minimized ribbon mode */
+.ribbontoolbar.minimized #CountItems.button .image, .ribbontoolbar.minimized #CountItems.button .image
+{
+    background-image: url('${ImgUrl}count-items.16x16.png');
+}
