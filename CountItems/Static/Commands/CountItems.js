@@ -67,13 +67,9 @@
 
 		switch (selection.getCount())
 		{
-			case 0: // check the Tree selection
-				var treeView = $controls.getControl($("#DashboardTree"), "Tridion.Controls.FilteredTree");
-				return treeView.getSelection().getItem(0);
-			case 1: // single item selected in the main list
-				return selection.getItem(0);
-			default:
-				return null;
+			case 0: return (selection.getParentItemUri) ? selection.getParentItemUri() : null;
+			case 1: return selection.getItem(0);
+			default: return null;
 		}
 	},
 });
