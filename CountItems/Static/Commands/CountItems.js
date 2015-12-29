@@ -1,6 +1,6 @@
-﻿Alchemy.command("${PluginName}", "CountItems", 
+﻿Alchemy.command("${PluginName}", "CountItems",
 {
-    isAvailable : function(selection) 
+	isAvailable: function (selection)
 	{
 		var item = this._getSelectedItem(selection);
 		if (item != null)
@@ -17,14 +17,14 @@
 		}
 
 		return false;
-    },
+	},
 
-    isEnabled : function(selection) 
+	isEnabled: function (selection)
 	{
-        return this.isAvailable(selection);
-    },
+		return this.isAvailable(selection);
+	},
 
-    execute : function(selection) 
+	execute: function (selection)
 	{
 		var p = this.properties;
 		var selectedItem = this._getSelectedItem(selection);
@@ -36,9 +36,9 @@
 		p.popup = $popupManager.createExternalContentPopup(url, parameters, args);
 		$evt.addEventHandler(p.popup, "close", this.getDelegate(this.closePopup));
 		p.popup.open();
-    },
+	},
 
-	closePopup : function()
+	closePopup: function ()
 	{
 		var p = this.properties;
 		if (p.popup)
@@ -48,9 +48,9 @@
 		}
 	},
 
-	_getPopupHeight : function(selectedItem)
+	_getPopupHeight: function (selectedItem)
 	{
-	    switch ($models.getItemType(selectedItem))
+		switch ($models.getItemType(selectedItem))
 		{
 			case $const.ItemType.FOLDER:
 				return 390;
@@ -59,9 +59,9 @@
 		}
 
 		return 270;
-    },
+	},
 
-    _getSelectedItem : function(selection)
+	_getSelectedItem: function (selection)
 	{
 		$assert.isObject(selection);
 
