@@ -2,9 +2,9 @@
 
 namespace Alchemy.Plugins.CountItems.Config
 {
-    public class ItemCountCommandSet : CommandSet
+    public class Commands : CommandSet
     {
-        public ItemCountCommandSet()
+        public Commands()
         {
             AddCommand("CountItems");
         }

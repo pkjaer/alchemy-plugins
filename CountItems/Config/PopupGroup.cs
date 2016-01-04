@@ -2,12 +2,12 @@
 
 namespace Alchemy.Plugins.CountItems.Config
 {
-    public class CountItemsPopupGroup : ResourceGroup
+    public class PopupGroup : ResourceGroup
     {
-        public CountItemsPopupGroup()
+        public PopupGroup()
         {
-            AddFile("CountItemsPopup.js");
-            AddFile("CountItemsPopup.css");
+            AddFile("Popup.js");
+            AddFile("Popup.css");
             AddWebApiProxy();
             AttachToView("CountItemsPopup.aspx");
             Dependencies.Add("Tridion.Web.UI.Editors.CME");

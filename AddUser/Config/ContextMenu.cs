@@ -2,9 +2,9 @@
 
 namespace Alchemy.Plugins.AddUser.Config
 {
-    public class AddUserContextMenu : ContextMenuExtension
+    public class ContextMenu : ContextMenuExtension
     {
-        public AddUserContextMenu()
+        public ContextMenu()
         {
             AssignId = "";
             Name = "";
@@ -12,7 +12,7 @@ namespace Alchemy.Plugins.AddUser.Config
 
             AddItem("alch_adduserbyname", Resources.ContextMenuEntry, "AddUserByName");
 
-            Dependencies.Add<AddUserButtonGroup>();
+            Dependencies.Add<ButtonGroup>();
             Apply.ToView(Constants.Views.DashboardView);
         }
     }

@@ -1,0 +1,4 @@
+﻿.contextmenu .CountItems .image
+{
+    background-image: url(${ImgUrl}count-items.16x16.png);
+}

@@ -1,0 +1,12 @@
+﻿.peek-frame
+{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 400px;
+    height: 500px;
+    display: none;
+    background: #fafafa;
+    border-width: 1px;
+    border-color: #a1a9b2;
+}

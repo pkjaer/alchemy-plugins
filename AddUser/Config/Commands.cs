@@ -2,9 +2,9 @@
 
 namespace Alchemy.Plugins.AddUser.Config
 {
-    public class AddUserCommandSet : CommandSet
+    public class Commands : CommandSet
     {
-        public AddUserCommandSet()
+        public Commands()
         {
             AddCommand("AddUserByName");
         }

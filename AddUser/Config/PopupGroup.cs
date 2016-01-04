@@ -2,12 +2,12 @@
 
 namespace Alchemy.Plugins.AddUser.Config
 {
-    public class AddUserPopupGroup : ResourceGroup
+    public class PopupGroup : ResourceGroup
     {
-        public AddUserPopupGroup()
+        public PopupGroup()
         {
-            AddFile("AddUserPopup.js");
-            AddFile("AddUserPopup.css");
+            AddFile("Popup.js");
+            AddFile("Popup.css");
             AttachToView("AddUserPopup.aspx");
             Dependencies.Add("Tridion.Web.UI.Editors.CME");
         }

@@ -1,0 +1,11 @@
+﻿
+/* main icon in full ribbon mode */
+.ribbontoolbar #Peek.button .image, .ribbontoolbar #Peek.button .image
+{
+    background-image: url('${ImgUrl}peek.32x32.png');
+}
+/* main icon in minimized ribbon mode */
+.ribbontoolbar.minimized #Peek.button .image, .ribbontoolbar.minimized #Peek.button .image
+{
+    background-image: url('${ImgUrl}peek.16x16.png');
+}

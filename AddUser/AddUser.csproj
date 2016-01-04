@@ -65,11 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlchemyPlugin.cs" />
-    <Compile Include="Config\AddUserButtonGroup.cs" />
-    <Compile Include="Config\AddUserCommandSet.cs" />
-    <Compile Include="Config\AddUserContextMenu.cs" />
-    <Compile Include="Config\AddUserPopupGroup.cs" />
-    <Compile Include="Config\AddUserToolbarButton.cs" />
+    <Compile Include="Config\ButtonGroup.cs" />
+    <Compile Include="Config\Commands.cs" />
+    <Compile Include="Config\ContextMenu.cs" />
+    <Compile Include="Config\PopupGroup.cs" />
+    <Compile Include="Config\ToolbarButton.cs" />
     <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -83,14 +83,14 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Static\Commands\AddUserByNameCommand.js" />
-    <Content Include="Static\Styles\AddUserContextMenu.css" />
+    <Content Include="Static\Styles\ContextMenu.css" />
     <Content Include="Static\Images\new-user.16x16.png" />
     <Content Include="Static\Images\new-user.24x24.png" />
     <Content Include="Static\Images\new-user.32x32.png" />
     <Content Include="Static\Images\new-user.48x48.png" />
-    <Content Include="Static\Scripts\AddUserPopup.js" />
-    <Content Include="Static\Styles\AddUserButton.css" />
-    <Content Include="Static\Styles\AddUserPopup.css" />
+    <Content Include="Static\Scripts\Popup.js" />
+    <Content Include="Static\Styles\ToolbarButton.css" />
+    <Content Include="Static\Styles\Popup.css" />
     <Content Include="Static\Views\AddUserPopup.aspx" />
   </ItemGroup>
   <ItemGroup />

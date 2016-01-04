@@ -2,9 +2,9 @@
 
 namespace Alchemy.Plugins.AddUser.Config
 {
-    public class AddUserToolbarButton : RibbonToolbarExtension
+    public class ToolbarButton : RibbonToolbarExtension
     {
-        public AddUserToolbarButton()
+        public ToolbarButton()
         {
             AssignId = @"AddUserByName";
             Command = @"AddUserByName";
@@ -15,7 +15,7 @@ namespace Alchemy.Plugins.AddUser.Config
             GroupId = @"AccessManagementGroup";
             InsertBefore = @"UsersDropdown";
 
-            Dependencies.Add<AddUserButtonGroup>();
+            Dependencies.Add<ButtonGroup>();
             Apply.ToView(Constants.Views.DashboardView, "DashboardToolbar");
         }
     }

@@ -2,16 +2,16 @@
 
 namespace Alchemy.Plugins.CountItems.Config
 {
-    public class ContextMenuOption : ContextMenuExtension
+    public class ContextMenu : ContextMenuExtension
     {
-        public ContextMenuOption()
+        public ContextMenu()
         {
             AssignId = "";
             Name = "";
             InsertBefore = "cm_whereused";
             AddItem("alch_countitems", Resources.ContextMenuEntry, "CountItems");
 
-            Dependencies.Add<ItemCountResourceGroup>();
+            Dependencies.Add<ButtonGroup>();
             Apply.ToView(Constants.Views.DashboardView);
         }
     }

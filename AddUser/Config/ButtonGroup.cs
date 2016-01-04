@@ -2,14 +2,14 @@
 
 namespace Alchemy.Plugins.AddUser.Config
 {
-    public class AddUserButtonGroup : ResourceGroup
+    public class ButtonGroup : ResourceGroup
     {
-        public AddUserButtonGroup()
+        public ButtonGroup()
         {
             AddFile("AddUserByNameCommand.js");
-            AddFile("AddUserButton.css");
-            AddFile("AddUserContextMenu.css");
-            AddFile<AddUserCommandSet>();
+            AddFile("ToolbarButton.css");
+            AddFile("ContextMenu.css");
+            AddFile<Commands>();
             AddWebApiProxy();
             Dependencies.AddAlchemyCore();
         }

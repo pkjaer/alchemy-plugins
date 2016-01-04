@@ -7,19 +7,19 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CD77B849-B127-4AFC-845A-49E6F1BC6F41}</ProjectGuid>
+    <ProjectGuid>{4B898B6D-AE6F-4BCF-99FB-FC5BE1457370}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alchemy.Plugins.CountItems</RootNamespace>
-    <AssemblyName>Alchemy.Plugins.CountItems</AssemblyName>
+    <RootNamespace>Alchemy.Plugins.Peek</RootNamespace>
+    <AssemblyName>Alchemy.Plugins.Peek</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <NuGetPackageImportStamp>ca9be2ec</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>69b7d7f3</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,73 +43,52 @@
     <AlchemyUploadDialog>RELEASE</AlchemyUploadDialog>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Alchemy4Tridion.Plugins">
+    <Reference Include="Alchemy4Tridion.Plugins, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Alchemy4Tridion.Plugin.1.0.0-beta7-0\lib\net40\Alchemy4Tridion.Plugins.dll</HintPath>
+      <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="Tridion.ContentManager.CoreService.Client, Version=7.1.0.1290, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <Private>True</Private>
       <HintPath>..\packages\Alchemy4Tridion.Plugin.1.0.0-beta7-0\lib\net40\Tridion.ContentManager.CoreService.Client.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="a4t.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Static\Commands\CountItems.js" />
-    <Content Include="Static\Images\category.32x32.png" />
-    <Content Include="Static\Images\component-template.32x32.png" />
-    <Content Include="Static\Images\component.32x32.png" />
-    <Content Include="Static\Images\count-items.16x16.png" />
-    <Content Include="Static\Images\count-items.32x32.png" />
-    <Content Include="Static\Images\folder.32x32.png" />
-    <Content Include="Static\Images\keyword.32x32.png" />
-    <Content Include="Static\Images\page-template.32x32.png" />
-    <Content Include="Static\Images\page.32x32.png" />
-    <Content Include="Static\Images\schema.32x32.png" />
-    <Content Include="Static\Images\structure-group.32x32.png" />
-    <Content Include="Static\Images\template-building-block.32x32.png" />
-    <Content Include="Static\Scripts\Popup.js" />
-    <Content Include="Static\Styles\ToolbarButton.css" />
-    <Content Include="Static\Styles\ContextMenu.css" />
-    <Content Include="Static\Styles\Popup.css" />
-    <Content Include="Static\Views\CountItemsPopup.aspx" />
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AlchemyPlugin.cs" />
-    <Compile Include="Config\ToolbarButton.cs" />
-    <Compile Include="Config\ClientSettings.cs" />
-    <Compile Include="Config\PopupGroup.cs" />
-    <Compile Include="Config\ContextMenu.cs" />
-    <Compile Include="Config\Commands.cs" />
-    <Compile Include="Config\ButtonGroup.cs" />
-    <Compile Include="Controllers\CountItemsController.cs" />
-    <Compile Include="Controllers\GetCountParameters.cs" />
-    <Compile Include="Controllers\ItemCountResult.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -117,6 +96,37 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Static\Commands\Peek.js" />
+    <Content Include="Static\Images\close.png" />
+    <Content Include="Static\Images\peek.16x16.png" />
+    <Content Include="Static\Images\peek.32x32.png" />
+    <Content Include="Static\Scripts\Dashboard.js" />
+    <Content Include="Static\Scripts\Frame.js" />
+    <Content Include="Static\Scripts\FrameManager.js" />
+    <Content Include="Static\Styles\ContextMenu.css" />
+    <Content Include="Static\Styles\Dashboard.css" />
+    <Content Include="Static\Styles\Frame.css" />
+    <Content Include="Static\Styles\ToolbarButton.css" />
+    <Content Include="Static\Views\Frame.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlchemyPlugin.cs" />
+    <Compile Include="Config\ButtonGroup.cs" />
+    <Compile Include="Config\Commands.cs" />
+    <Compile Include="Config\FrameGroup.cs" />
+    <Compile Include="Config\ToolbarButton.cs" />
+    <Compile Include="Controllers\PeekController.cs" />
+    <Compile Include="Controllers\PeekParameters.cs" />
+    <Compile Include="Controllers\PeekResults.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -138,9 +148,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52522</DevelopmentServerPort>
+          <DevelopmentServerPort>53308</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52522/</IISUrl>
+          <IISUrl>http://localhost:53308/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

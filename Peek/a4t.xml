@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<plugin xmlns:c="http://www.alchemywebstore.com/configuration/definitions" xmlns="http://www.alchemywebstore.com/">
+	<name>Peek_Item</name>
+	<description><![CDATA[Shows a quick view of the selected item without needing to open it.]]></description>
+</plugin>

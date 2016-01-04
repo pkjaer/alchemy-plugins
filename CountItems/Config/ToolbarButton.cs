@@ -2,9 +2,9 @@
 
 namespace Alchemy.Plugins.CountItems.Config
 {
-    public class AddUserToolbarButton : RibbonToolbarExtension
+    public class ToolbarButton : RibbonToolbarExtension
     {
-        public AddUserToolbarButton()
+        public ToolbarButton()
         {
             AssignId = @"CountItems";
             Command = @"CountItems";
@@ -15,7 +15,7 @@ namespace Alchemy.Plugins.CountItems.Config
             GroupId = Constants.GroupIds.HomePage.ManageGroup;
             InsertBefore = @"WhereUsedBtn";
 
-            Dependencies.Add<ItemCountResourceGroup>();
+            Dependencies.Add<ButtonGroup>();
             Apply.ToView(Constants.Views.DashboardView, "DashboardToolbar");
         }
     }
