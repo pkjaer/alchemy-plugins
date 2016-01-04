@@ -17,6 +17,7 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.initialize = function Frame
 	if (view)
 	{
 		$evt.addEventHandler(view, "close", this.getDelegate(this._onCloseButtonClicked));
+		$evt.addEventHandler(view, "resize", this.getDelegate(this._onFrameContentResized));
 	}
 };
 
@@ -24,6 +25,11 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.setSelectedItem = function(
 {
 	var p = this.properties;
 	if (p.selectedItem == selectedItem) return;
+	if (!selectedItem)
+	{
+		this.hide();
+		return;
+	}
 
 	// Delayed slightly to avoid spamming requests when you quickly select multiple items in a row (think scrolling through the list).
 	if (p.delayTimer)
@@ -105,4 +111,14 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.onSelectionChanged = functi
 Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onCloseButtonClicked = function(event)
 {
 	this.hide();
+};
+
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onFrameContentResized = function(event)
+{
+	var width = event.data.width;
+	var height = event.data.height;
+	console.log("Resizing window to fit the content:", height, width);
+
+	var frame = this.getElement();
+	frame.style.height = (30 + height) + "px";
 };

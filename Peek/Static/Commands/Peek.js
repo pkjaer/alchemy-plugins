@@ -19,7 +19,7 @@
 		var p = this.properties;
 
 		var result = this.isAvailable(selection);
-		if (result && p.frameManager)
+		if (p.frameManager)
 		{
 			p.frameManager.onSelectionChanged(this.getSingleSelection(selection));
 		}

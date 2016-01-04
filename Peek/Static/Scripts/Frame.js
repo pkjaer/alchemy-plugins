@@ -89,6 +89,18 @@ Alchemy.Plugins.Peek.Views.Frame.prototype.setSelectedItem = function Frame$setS
 	this.startPeeking();
 };
 
+Alchemy.Plugins.Peek.Views.Frame.prototype.getContentHeight = function Frame$getContentHeight()
+{
+	var content = $(".content");
+	return Math.max(content.scrollHeight, content.offsetHeight);
+};
+
+Alchemy.Plugins.Peek.Views.Frame.prototype.getContentWidth = function Frame$getContentWidth()
+{
+	var content = $(".content");
+	return Math.max(content.scrollWidth, content.offsetWidth);
+};
+
 Alchemy.Plugins.Peek.Views.Frame.prototype._onSuccess = function Frame$_onSuccess(result)
 {
 	var p = this.properties;
@@ -101,6 +113,8 @@ Alchemy.Plugins.Peek.Views.Frame.prototype._onSuccess = function Frame$_onSucces
 
 	for (var key in result)
 	{
+		if (!result[key]) continue;
+
 		var row = document.createElement("tr");
 		row.className = "result " + key;
 		table.appendChild(row);
@@ -114,6 +128,8 @@ Alchemy.Plugins.Peek.Views.Frame.prototype._onSuccess = function Frame$_onSucces
 		$dom.setInnerText(cell, result[key]);
 		row.appendChild(cell);
 	}
+
+	this.fireEvent("resize", { height: this.getContentHeight(), width: this.getContentWidth() });
 };
 
 Alchemy.Plugins.Peek.Views.Frame.prototype._onError = function Frame$_onError(type, error)
