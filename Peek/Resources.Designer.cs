@@ -61,6 +61,15 @@ namespace Alchemy.Plugins.Peek {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (empty).
+        /// </summary>
+        internal static string EmptyLabel {
+            get {
+                return ResourceManager.GetString("EmptyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Peek.
         /// </summary>
         internal static string ToolbarButtonName {

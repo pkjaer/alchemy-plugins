@@ -6,7 +6,7 @@ Alchemy.Plugins.Peek.Controls.FrameManager = function Peek$FrameManager(element)
 	this.addInterface("Tridion.ControlBase", [element]);
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype.initialize = function FrameManager$initialize()
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.initialize = function Peek$FrameManager$initialize()
 {
 	var p = this.properties;
 	var c = p.controls;
@@ -18,10 +18,11 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.initialize = function Frame
 	{
 		$evt.addEventHandler(view, "close", this.getDelegate(this._onCloseButtonClicked));
 		$evt.addEventHandler(view, "resize", this.getDelegate(this._onFrameContentResized));
+		$evt.addEventHandler(view, "linkClicked", this.getDelegate(this._onLinkClicked));
 	}
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype.setSelectedItem = function(selectedItem)
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.setSelectedItem = function Peek$FrameManager$setSelectedItem(selectedItem)
 {
 	var p = this.properties;
 	if (p.selectedItem == selectedItem) return;
@@ -42,7 +43,7 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.setSelectedItem = function(
 	p.delayTimer = setTimeout(this.getDelegate(this._setSelectedItemDelayed), p.delay);
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype._setSelectedItemDelayed = function()
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype._setSelectedItemDelayed = function Peek$FrameManager$_setSelectedItemDelayed()
 {
 	var p = this.properties;
 	p.delayTimer = null;
@@ -58,26 +59,26 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype._setSelectedItemDelayed = f
 	}
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype.hide = function()
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.hide = function Peek$FrameManager$hide()
 {
 	var p = this.properties;
 	$css.undisplay(this.getElement());
 	p.displayed = false;
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype.show = function()
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.show = function Peek$FrameManager$show()
 {
 	var p = this.properties;
 	$css.display(this.getElement());
 	p.displayed = true;
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype.isVisible = function()
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.isVisible = function Peek$FrameManager$isVisible()
 {
 	return this.properties.displayed;
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype.toggle = function(selectedItem)
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.toggle = function Peek$FrameManager$toggle(selectedItem)
 {
 	if (this.isVisible())
 	{
@@ -90,7 +91,7 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.toggle = function(selectedI
 	}
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype.getView = function()
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.getView = function Peek$FrameManager$getView()
 {
 	try
 	{
@@ -100,7 +101,7 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.getView = function()
 	return null;
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype.onSelectionChanged = function(selectedItem)
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.onSelectionChanged = function Peek$FrameManager$onSelectionChanged(selectedItem)
 {
 	if (this.isVisible())
 	{
@@ -108,17 +109,21 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.onSelectionChanged = functi
 	}
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onCloseButtonClicked = function(event)
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onCloseButtonClicked = function Peek$FrameManager$_onCloseButtonClicked(event)
 {
 	this.hide();
 };
 
-Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onFrameContentResized = function(event)
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onFrameContentResized = function Peek$FrameManager$_onFrameContentResized(event)
 {
-	var width = event.data.width;
 	var height = event.data.height;
-	console.log("Resizing window to fit the content:", height, width);
-
 	var frame = this.getElement();
 	frame.style.height = (30 + height) + "px";
+};
+
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onLinkClicked = function Peek$FrameManager$_onLinkClicked(event)
+{
+	var selection = new Tridion.Cme.Selection();
+	selection.addItem(event.data.itemUri);
+	$commands.executeCommand("Open", selection);
 };

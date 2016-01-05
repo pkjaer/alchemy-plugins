@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -33,7 +32,7 @@ namespace Alchemy.Plugins.Peek.Controllers
                 if (Client.IsExistingObject(parameters.ItemUri))
                 {
                     var item = Client.Read(parameters.ItemUri, readOptions);
-                    result.Id = item.Id;
+                    AddBasicInfo(item, result);
                     AddPropertiesForItemType(item, result);
                 }
 
@@ -45,17 +44,47 @@ namespace Alchemy.Plugins.Peek.Controllers
             }
         }
 
+        private static void AddBasicInfo(IdentifiableObjectData item, PeekResults result)
+        {
+            result.Id = item.Id;
+            if (item.VersionInfo.CreationDate.HasValue)
+            {
+                result.CreationDate = item.VersionInfo.CreationDate.Value;
+            }
+            if (item.VersionInfo.RevisionDate.HasValue && item.VersionInfo.RevisionDate.Value != result.CreationDate)
+            {
+                result.RevisionDate = item.VersionInfo.RevisionDate.Value;
+            }
+        }
+
         private void AddPropertiesForItemType(IdentifiableObjectData item, PeekResults result)
         {
+
+
             var rlo = item as RepositoryLocalObjectData;
             if (rlo != null)
             {
-                result.Path = rlo.LocationInfo.Path;
+                result.LockedBy = LinkResult.From(rlo.LockInfo.LockUser);
+                result.MetadataSchema = LinkResult.From(rlo.MetadataSchema);
+            }
 
-                if (rlo.MetadataSchema.IdRef != "tcm:0-0-0")
-                {
-                    result.MetadataSchema = FormatInvariant("{0} ({1})", rlo.MetadataSchema.Title, rlo.MetadataSchema.IdRef);
-                }
+            var sg = item as StructureGroupData;
+            if (sg != null)
+            {
+                result.Directory = string.IsNullOrWhiteSpace(sg.Directory) ? Resources.EmptyLabel : sg.Directory;
+                result.DefaultPageTemplate = LinkResult.From(sg.DefaultPageTemplate);
+            }
+
+            var folder = item as FolderData;
+            if (folder != null)
+            {
+                result.LinkedSchema = LinkResult.From(folder.LinkedSchema);
+            }
+
+            var component = item as ComponentData;
+            if (component != null)
+            {
+                result.Schema = LinkResult.From(component.Schema);
             }
 
             /*
@@ -90,11 +119,6 @@ namespace Alchemy.Plugins.Peek.Controllers
              * 
              * (Addon item types like Address Books and Distribution Lists; they cannot be loaded using the Core Service, though)
              */
-        }
-
-        private static string FormatInvariant(string format, params object[] arguments)
-        {
-            return string.Format(CultureInfo.InvariantCulture, format, arguments);
         }
     }
 }

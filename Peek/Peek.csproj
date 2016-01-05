@@ -118,6 +118,7 @@
     <Compile Include="Config\Commands.cs" />
     <Compile Include="Config\FrameGroup.cs" />
     <Compile Include="Config\ToolbarButton.cs" />
+    <Compile Include="Controllers\LinkResult.cs" />
     <Compile Include="Controllers\PeekController.cs" />
     <Compile Include="Controllers\PeekParameters.cs" />
     <Compile Include="Controllers\PeekResults.cs" />
@@ -133,6 +134,7 @@
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

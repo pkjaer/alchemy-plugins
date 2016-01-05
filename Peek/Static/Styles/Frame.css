@@ -67,6 +67,12 @@ h1
     text-align: right;
 }
 
+.results table td .link
+{
+    color: #2972cc;
+    cursor: pointer;
+}
+
 .results table tr:hover td
 {
     color: #009;
@@ -84,8 +90,8 @@ h1
     background-image: url(${ImgUrl}close.png);
     background-color: #fafafa;
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 7px;
+    right: 7px;
     min-width: 14px;
     min-height: 14px;
     width: 14px;
