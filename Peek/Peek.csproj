@@ -103,8 +103,10 @@
     <Content Include="Static\Images\peek.16x16.png" />
     <Content Include="Static\Images\peek.32x32.png" />
     <Content Include="Static\Scripts\Dashboard.js" />
+    <Content Include="Static\Scripts\FadeAnimation.js" />
     <Content Include="Static\Scripts\Frame.js" />
     <Content Include="Static\Scripts\FrameManager.js" />
+    <Content Include="Static\Scripts\ResizeAnimation.js" />
     <Content Include="Static\Styles\ContextMenu.css" />
     <Content Include="Static\Styles\Dashboard.css" />
     <Content Include="Static\Styles\Frame.css" />
@@ -118,6 +120,7 @@
     <Compile Include="Config\Commands.cs" />
     <Compile Include="Config\FrameGroup.cs" />
     <Compile Include="Config\ToolbarButton.cs" />
+    <Compile Include="Controllers\IEnumerableExtension.cs" />
     <Compile Include="Controllers\LinkResult.cs" />
     <Compile Include="Controllers\PeekController.cs" />
     <Compile Include="Controllers\PeekParameters.cs" />
@@ -169,6 +172,13 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Alchemy4Tridion.Plugin.1.0.0-beta7-0\build\net40\Alchemy4Tridion.Plugin.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Alchemy4Tridion.Plugin.1.0.0-beta7-0\build\net40\Alchemy4Tridion.Plugin.targets'))" />
   </Target>
+  <Target Name="A4TPostBuildEvents" AfterTargets="Build">
+    <Exec Command="powershell -NoProfile -File $(SolutionDir)UploadPlugin.ps1 $(TargetDir)$(TargetName).a4t" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

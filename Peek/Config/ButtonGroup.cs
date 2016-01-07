@@ -8,6 +8,8 @@ namespace Alchemy.Plugins.Peek.Config
         {
             AddFile("Peek.js");
             AddFile("Dashboard.js");
+            AddFile("FadeAnimation.js");
+            AddFile("ResizeAnimation.js");
             AddFile("FrameManager.js");
 
             AddFile("ContextMenu.css");

@@ -10,20 +10,21 @@
 
 	isAvailable: function (selection)
 	{
-		var item = this.getSingleSelection(selection);
-		return (item != null);
+		return true;
 	},
 
 	isEnabled: function (selection)
 	{
 		var p = this.properties;
 
-		var result = this.isAvailable(selection);
+		var item = this.getSingleSelection(selection);
+
 		if (p.frameManager)
 		{
-			p.frameManager.onSelectionChanged(this.getSingleSelection(selection));
+			p.frameManager.onSelectionChanged(item);
 		}
-		return result;
+
+		return true;
 	},
 
 	execute: function (selection)

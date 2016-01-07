@@ -11,8 +11,11 @@
                 <div id="ItemTitle" class="header"></div>
             </div>
             <hr/>
-            <div id="Results" class="results"></div>
-            <div id="Error" class="error"></div>
+            <div class="resultArea">
+                <div class="loadingText"></div>
+                <div id="Results" class="results"></div>
+                <div id="Error" class="error"></div>
+            </div>
         </div>
     </body>
 </html>

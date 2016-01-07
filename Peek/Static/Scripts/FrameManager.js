@@ -12,6 +12,14 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.initialize = function Peek$
 	var c = p.controls;
 
 	p.delay = 300;
+	p.minimumHeight = 130;
+	p.minimumWidth = 400;
+
+	c.fadeAnimation = $controls.getControl(p.element, "Alchemy.Plugins.Peek.Controls.FadeAnimation");
+	c.resizeAnimation = $controls.getControl(p.element, "Alchemy.Plugins.Peek.Controls.ResizeAnimation");
+
+	$evt.addEventHandler(c.fadeAnimation, "fadein", this.getDelegate(this.show));
+	$evt.addEventHandler(c.fadeAnimation, "fadedout", this.getDelegate(this.hide));
 
 	var view = this.getView();
 	if (view)
@@ -20,17 +28,16 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.initialize = function Peek$
 		$evt.addEventHandler(view, "resize", this.getDelegate(this._onFrameContentResized));
 		$evt.addEventHandler(view, "linkClicked", this.getDelegate(this._onLinkClicked));
 	}
+
+	p.element.style.height = p.minimumHeight;
+	p.element.style.width = p.minimumWidth;
+	this.hide();
 };
 
 Alchemy.Plugins.Peek.Controls.FrameManager.prototype.setSelectedItem = function Peek$FrameManager$setSelectedItem(selectedItem)
 {
 	var p = this.properties;
 	if (p.selectedItem == selectedItem) return;
-	if (!selectedItem)
-	{
-		this.hide();
-		return;
-	}
 
 	// Delayed slightly to avoid spamming requests when you quickly select multiple items in a row (think scrolling through the list).
 	if (p.delayTimer)
@@ -53,10 +60,6 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype._setSelectedItemDelayed = f
 	{
 		view.setSelectedItem(p.selectedItem);
 	} 
-	else
-	{
-		console.warn("Failed to set selected item for Peek.");
-	}
 };
 
 Alchemy.Plugins.Peek.Controls.FrameManager.prototype.hide = function Peek$FrameManager$hide()
@@ -73,6 +76,16 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.show = function Peek$FrameM
 	p.displayed = true;
 };
 
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.showAnimated = function Peek$FrameManager$showAnimated()
+{
+	this.properties.controls.fadeAnimation.fadeIn();
+};
+
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.hideAnimated = function Peek$FrameManager$hideAnimated()
+{
+	this.properties.controls.fadeAnimation.fadeOut();
+};
+
 Alchemy.Plugins.Peek.Controls.FrameManager.prototype.isVisible = function Peek$FrameManager$isVisible()
 {
 	return this.properties.displayed;
@@ -82,12 +95,12 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.toggle = function Peek$Fram
 {
 	if (this.isVisible())
 	{
-		this.hide();
+		this.hideAnimated();
 	} 
 	else
 	{
 		this.setSelectedItem(selectedItem);
-		this.show();
+		this.showAnimated();
 	}
 };
 
@@ -103,22 +116,32 @@ Alchemy.Plugins.Peek.Controls.FrameManager.prototype.getView = function Peek$Fra
 
 Alchemy.Plugins.Peek.Controls.FrameManager.prototype.onSelectionChanged = function Peek$FrameManager$onSelectionChanged(selectedItem)
 {
+	var p = this.properties;
+	var c = p.controls;
+
 	if (this.isVisible())
 	{
-		this.setSelectedItem(selectedItem);
+		if (selectedItem)
+		{
+			this.setSelectedItem(selectedItem);
+		} 
 	}
 };
 
+Alchemy.Plugins.Peek.Controls.FrameManager.prototype.resize = function Peek$FrameManager$resize(height, width)
+{
+	this.properties.controls.resizeAnimation.resize(height, width);
+}
+
 Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onCloseButtonClicked = function Peek$FrameManager$_onCloseButtonClicked(event)
 {
-	this.hide();
+	this.hideAnimated();
 };
 
 Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onFrameContentResized = function Peek$FrameManager$_onFrameContentResized(event)
 {
-	var height = event.data.height;
-	var frame = this.getElement();
-	frame.style.height = (30 + height) + "px";
+	var p = this.properties;
+	this.resize(Math.max(event.data.height + 20, p.minimumHeight), Math.max(event.data.width + 20, p.minimumWidth));
 };
 
 Alchemy.Plugins.Peek.Controls.FrameManager.prototype._onLinkClicked = function Peek$FrameManager$_onLinkClicked(event)

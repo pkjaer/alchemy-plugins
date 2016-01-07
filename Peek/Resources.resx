@@ -117,13 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CannotBePublished" xml:space="preserve">
+    <value>No (explicit)</value>
+  </data>
+  <data name="CannotBePublishedDueToAncestor" xml:space="preserve">
+    <value>No (inherited)</value>
+  </data>
+  <data name="ComponentPresentationSummary" xml:space="preserve">
+    <value>{0} ({1} templates)</value>
+  </data>
+  <data name="ComponentPresentationSummarySameTemplate" xml:space="preserve">
+    <value>{0} (one template)</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="DynamicTemplateAllowedOnPage" xml:space="preserve">
+    <value>Yes (allowed on Pages)</value>
+  </data>
+  <data name="DynamicTemplateNotAllowedOnPage" xml:space="preserve">
+    <value>Yes (not allowed on Pages)</value>
+  </data>
   <data name="EmptyLabel" xml:space="preserve">
     <value>(empty)</value>
+  </data>
+  <data name="FileSizeInBytes" xml:space="preserve">
+    <value>{0} bytes</value>
+  </data>
+  <data name="FileSizeInGigaBytes" xml:space="preserve">
+    <value>{0} GB</value>
+  </data>
+  <data name="FileSizeInKiloBytes" xml:space="preserve">
+    <value>{0} KB</value>
+  </data>
+  <data name="FileSizeInMegaBytes" xml:space="preserve">
+    <value>{0} MB</value>
+  </data>
+  <data name="GroupMembershipSummaryScoped" xml:space="preserve">
+    <value>{0} (in select Publications)</value>
+  </data>
+  <data name="GroupScopeAllPublications" xml:space="preserve">
+    <value>All Publications</value>
+  </data>
+  <data name="GroupScopeSpecificPublications" xml:space="preserve">
+    <value>Specific Publications</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>(not set)</value>
+  </data>
+  <data name="PriorityHigh" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="PriorityLow" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="PriorityMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="PriorityNeverLink" xml:space="preserve">
+    <value>Never Link</value>
+  </data>
+  <data name="SchemaFieldsSummary" xml:space="preserve">
+    <value>{0} ({1} optional)</value>
+  </data>
+  <data name="SchemaFieldsSummaryAllMandatory" xml:space="preserve">
+    <value>{0} (all mandatory)</value>
+  </data>
+  <data name="SchemaFieldsSummaryAllOptional" xml:space="preserve">
+    <value>{0} (all optional)</value>
   </data>
   <data name="ToolbarButtonName" xml:space="preserve">
     <value>Peek</value>
   </data>
   <data name="ToolbarButtonTooltip" xml:space="preserve">
     <value>Shows a quick view of the selected item without needing to open it.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="You" xml:space="preserve">
+    <value>You</value>
   </data>
 </root>

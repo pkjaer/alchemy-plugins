@@ -9,4 +9,6 @@
     background: #fafafa;
     border-width: 1px;
     border-color: #a1a9b2;
+    z-index: 99999;
+    opacity: 0;
 }

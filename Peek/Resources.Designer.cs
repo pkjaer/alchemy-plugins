@@ -61,11 +61,218 @@ namespace Alchemy.Plugins.Peek {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No (explicit).
+        /// </summary>
+        internal static string CannotBePublished {
+            get {
+                return ResourceManager.GetString("CannotBePublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No (inherited).
+        /// </summary>
+        internal static string CannotBePublishedDueToAncestor {
+            get {
+                return ResourceManager.GetString("CannotBePublishedDueToAncestor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1} templates).
+        /// </summary>
+        internal static string ComponentPresentationSummary {
+            get {
+                return ResourceManager.GetString("ComponentPresentationSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} (one template).
+        /// </summary>
+        internal static string ComponentPresentationSummarySameTemplate {
+            get {
+                return ResourceManager.GetString("ComponentPresentationSummarySameTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        internal static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes (allowed on Pages).
+        /// </summary>
+        internal static string DynamicTemplateAllowedOnPage {
+            get {
+                return ResourceManager.GetString("DynamicTemplateAllowedOnPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes (not allowed on Pages).
+        /// </summary>
+        internal static string DynamicTemplateNotAllowedOnPage {
+            get {
+                return ResourceManager.GetString("DynamicTemplateNotAllowedOnPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (empty).
         /// </summary>
         internal static string EmptyLabel {
             get {
                 return ResourceManager.GetString("EmptyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} bytes.
+        /// </summary>
+        internal static string FileSizeInBytes {
+            get {
+                return ResourceManager.GetString("FileSizeInBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} GB.
+        /// </summary>
+        internal static string FileSizeInGigaBytes {
+            get {
+                return ResourceManager.GetString("FileSizeInGigaBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} KB.
+        /// </summary>
+        internal static string FileSizeInKiloBytes {
+            get {
+                return ResourceManager.GetString("FileSizeInKiloBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} MB.
+        /// </summary>
+        internal static string FileSizeInMegaBytes {
+            get {
+                return ResourceManager.GetString("FileSizeInMegaBytes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} (in select Publications).
+        /// </summary>
+        internal static string GroupMembershipSummaryScoped {
+            get {
+                return ResourceManager.GetString("GroupMembershipSummaryScoped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Publications.
+        /// </summary>
+        internal static string GroupScopeAllPublications {
+            get {
+                return ResourceManager.GetString("GroupScopeAllPublications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specific Publications.
+        /// </summary>
+        internal static string GroupScopeSpecificPublications {
+            get {
+                return ResourceManager.GetString("GroupScopeSpecificPublications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (not set).
+        /// </summary>
+        internal static string NotSet {
+            get {
+                return ResourceManager.GetString("NotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High.
+        /// </summary>
+        internal static string PriorityHigh {
+            get {
+                return ResourceManager.GetString("PriorityHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low.
+        /// </summary>
+        internal static string PriorityLow {
+            get {
+                return ResourceManager.GetString("PriorityLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        internal static string PriorityMedium {
+            get {
+                return ResourceManager.GetString("PriorityMedium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never Link.
+        /// </summary>
+        internal static string PriorityNeverLink {
+            get {
+                return ResourceManager.GetString("PriorityNeverLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ({1} optional).
+        /// </summary>
+        internal static string SchemaFieldsSummary {
+            get {
+                return ResourceManager.GetString("SchemaFieldsSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} (all mandatory).
+        /// </summary>
+        internal static string SchemaFieldsSummaryAllMandatory {
+            get {
+                return ResourceManager.GetString("SchemaFieldsSummaryAllMandatory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} (all optional).
+        /// </summary>
+        internal static string SchemaFieldsSummaryAllOptional {
+            get {
+                return ResourceManager.GetString("SchemaFieldsSummaryAllOptional", resourceCulture);
             }
         }
         
@@ -84,6 +291,24 @@ namespace Alchemy.Plugins.Peek {
         internal static string ToolbarButtonTooltip {
             get {
                 return ResourceManager.GetString("ToolbarButtonTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You.
+        /// </summary>
+        internal static string You {
+            get {
+                return ResourceManager.GetString("You", resourceCulture);
             }
         }
     }
