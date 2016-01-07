@@ -50,6 +50,9 @@ namespace Alchemy.Plugins.Peek.Controllers
         public string Conditions { get; set; }              // Target Group
         public string MimeType { get; set; }                // Multimedia Type
         public string FileExtensions { get; set; }          // Multimedia Type
+        public string DefaultCodePage { get; set; }         // Publication Target
+        public string TargetLanguage { get; set; }          // Publication Target
+        public string Destinations { get; set; }            // Publication Target
 
         public int? Versions { get; set; }
         public DateTime? CreationDate { get; set; }

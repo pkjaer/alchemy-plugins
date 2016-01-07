@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Xml.Linq;
 using Alchemy4Tridion.Plugins;
@@ -166,9 +167,11 @@ namespace Alchemy.Plugins.Peek.Controllers
             AddPropertiesForFolder(item as FolderData, result);
             AddPropertiesForVirtualFolder(item as VirtualFolderData, result);
             AddPropertiesForPublication(item as PublicationData, result);
+            AddPropertiesForPublicationTarget(item as PublicationTargetData, result);
             AddPropertiesForCategory(item as CategoryData, result);
             AddPropertiesForKeyword(item as KeywordData, result);
             AddPropertiesForTargetGroup(item as TargetGroupData, result);
+            AddPropertiesForTargetType(item as TargetTypeData, result);
             AddPropertiesForMultimediaType(item as MultimediaTypeData, result);
             AddPropertiesForUser(item as UserData, result);
             AddPropertiesForGroup(item as GroupData, result);
@@ -231,6 +234,49 @@ namespace Alchemy.Plugins.Peek.Controllers
             result.MultimediaPath = publication.MultimediaPath;
             result.MultimediaUrl = publication.MultimediaUrl;
             result.WebDavUrl = publication.LocationInfo.WebDavUrl;
+        }
+
+        private static void AddPropertiesForPublicationTarget(PublicationTargetData publicationTarget, PeekResults result)
+        {
+            if (publicationTarget == null) return;
+
+            result.Description = publicationTarget.Description;
+            result.TargetLanguage = publicationTarget.TargetLanguage;
+
+            if (publicationTarget.DefaultCodePage != null)
+            {
+                result.DefaultCodePage = "System Default";
+                if (publicationTarget.DefaultCodePage > 0)
+                {
+                    var encoding = Encoding.GetEncodings().FirstOrDefault(e => e.CodePage == publicationTarget.DefaultCodePage);
+                    if (encoding != null)
+                    {
+                        result.DefaultCodePage = encoding.DisplayName;
+                    }
+                }
+            }
+
+            if (publicationTarget.Priority != null)
+            {
+                switch (publicationTarget.Priority.Value)
+                {
+                    case PublishPriority.High: 
+                        result.Priority = Resources.PriorityHigh; 
+                        break;
+                    case PublishPriority.Low: 
+                        result.Priority = Resources.PriorityLow; 
+                        break;
+                    default:
+                        result.Priority = Resources.PriorityMedium;
+                        break;
+                }
+            }
+
+            var destinations = publicationTarget.Destinations.Select(
+                    destination => string.Format(Resources.PublicationTargetDestination, destination.Title, destination.ProtocolSchema.Title)
+                ).ToList();
+
+            result.Destinations = string.Join(", ", destinations);
         }
 
         private void AddPropertiesForRepositoryLocalObject(RepositoryLocalObjectData rlo, PeekResults result)
@@ -301,6 +347,13 @@ namespace Alchemy.Plugins.Peek.Controllers
             result.MetadataSchema = LinkResult.From(targetGroup.MetadataSchema);
             int count = targetGroup.Conditions.Count();
             result.Conditions = count > 0 ? count.ToString(CultureInfo.InvariantCulture) : Resources.None;
+        }
+
+        private static void AddPropertiesForTargetType(TargetTypeData targetType, PeekResults result)
+        {
+            if (targetType == null) return;
+
+            result.Description = targetType.Description;
         }
 
         private void AddPropertiesForTemplateBuildingBlock(TemplateBuildingBlockData templateBuildingBlock, PeekResults result)

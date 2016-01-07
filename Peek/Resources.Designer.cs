@@ -250,6 +250,15 @@ namespace Alchemy.Plugins.Peek {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} ({1}).
+        /// </summary>
+        internal static string PublicationTargetDestination {
+            get {
+                return ResourceManager.GetString("PublicationTargetDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} ({1} optional).
         /// </summary>
         internal static string SchemaFieldsSummary {

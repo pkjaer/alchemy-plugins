@@ -180,6 +180,9 @@
   <data name="PriorityNeverLink" xml:space="preserve">
     <value>Never Link</value>
   </data>
+  <data name="PublicationTargetDestination" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
   <data name="SchemaFieldsSummary" xml:space="preserve">
     <value>{0} ({1} optional)</value>
   </data>
