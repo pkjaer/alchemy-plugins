@@ -39,7 +39,7 @@ namespace Alchemy.Plugins.Peek.Controllers
 
                 if (Client.IsExistingObject(parameters.ItemUri))
                 {
-                    var readOptions = new ReadOptions { LoadFlags = LoadFlags.Expanded | LoadFlags.WebDavUrls | LoadFlags.IncludeDynamicVersionInfo | LoadFlags.KeywordXlinks };
+                    var readOptions = new ReadOptions { LoadFlags = LoadFlags.Expanded | LoadFlags.WebDavUrls };
                     var item = Client.Read(parameters.ItemUri, readOptions);
                     AddCommonProperties(item, result);
                     AddPropertiesForItemType(item, result);
@@ -67,62 +67,24 @@ namespace Alchemy.Plugins.Peek.Controllers
             }
         }
 
-        private void AddPropertiesForItemType(IdentifiableObjectData item, PeekResults result)
+        private static void AddPropertiesForCategory(CategoryData category, PeekResults result)
         {
-            AddPropertiesForRepositoryLocalObject(item as RepositoryLocalObjectData, result);
-            AddPropertiesForSchema(item as SchemaData, result);
-            AddPropertiesForComponent(item as ComponentData, result);
-            AddPropertiesForComponentTemplate(item as ComponentTemplateData, result);
-            AddPropertiesForPage(item as PageData, result);
-            AddPropertiesForPageTemplate(item as PageTemplateData, result);
-            AddPropertiesForTemplateBuildingBlock(item as TemplateBuildingBlockData, result);
-            AddPropertiesForStructureGroup(item as StructureGroupData, result);
-            AddPropertiesForFolder(item as FolderData, result);
-            AddPropertiesForVirtualFolder(item as VirtualFolderData, result);
-            AddPropertiesForPublication(item as PublicationData, result);
-            AddPropertiesForCategory(item as CategoryData, result);
-            AddPropertiesForKeyword(item as KeywordData, result);
-            AddPropertiesForTargetGroup(item as TargetGroupData, result);
-            AddPropertiesForMultimediaType(item as MultimediaTypeData, result);
-            AddPropertiesForUser(item as UserData, result);
-            AddPropertiesForGroup(item as GroupData, result);
-        }
+            if (category == null) return;
 
-        private void AddPropertiesForRepositoryLocalObject(RepositoryLocalObjectData rlo, PeekResults result)
-        {
-            if (rlo == null) return;
+            result.Description = category.Description;
+            result.XmlName = category.XmlName;
 
-            result.LockedBy = GetLockInfo(rlo);
-            result.MetadataSchema = LinkResult.From(rlo.MetadataSchema);
-            if (rlo.LocationInfo != null)
+            if (category.UseForNavigation == false)
             {
-                result.WebDavUrl = rlo.LocationInfo.WebDavUrl;
+                result.Publishable = Resources.CannotBePublished;
             }
 
-            FullVersionInfo versionInfo = rlo.VersionInfo as FullVersionInfo;
-            if (versionInfo != null)
+            if (category.UseForIdentification == true)
             {
-                result.Creator = versionInfo.Creator.Title;
-                if (result.RevisionDate != null)
-                {
-                    result.Revisor = versionInfo.Revisor.Title;
-                }
-
-                if (versionInfo.LastVersion != null && versionInfo.LastVersion.Value > 1)
-                {
-                    result.Versions = versionInfo.LastVersion.Value;
-                }
+                result.UseForIdentification = Resources.Yes;
             }
-        }
 
-        private static void AddPropertiesForSchema(SchemaData schema, PeekResults result)
-        {
-            if (schema == null) return;
-
-            result.Description = schema.Description;
-            result.Namespace = schema.NamespaceUri;
-            result.RootElementName = schema.RootElementName;
-            AddFieldsSummary(schema, result);
+            result.LinkedSchema = LinkResult.From(category.KeywordMetadataSchema);
         }
 
         private static void AddPropertiesForComponent(ComponentData component, PeekResults result)
@@ -169,6 +131,70 @@ namespace Alchemy.Plugins.Peek.Controllers
             }
         }
 
+        private static void AddPropertiesForFolder(FolderData folder, PeekResults result)
+        {
+            if (folder == null) return;
+
+            result.LinkedSchema = LinkResult.From(folder.LinkedSchema);
+        }
+
+        private static void AddPropertiesForGroup(GroupData group, PeekResults result)
+        {
+            if (group == null) return;
+            result.Description = @group.Description;
+
+            if (group.GroupMemberships != null)
+            {
+                result.GroupMemberships = GetGroupMembershipSummary(group.GroupMemberships);
+            }
+
+            result.Scope = group.Scope.Length > 0
+                ? Resources.GroupScopeSpecificPublications
+                : Resources.GroupScopeAllPublications;
+        }
+
+        private void AddPropertiesForItemType(IdentifiableObjectData item, PeekResults result)
+        {
+            AddPropertiesForRepositoryLocalObject(item as RepositoryLocalObjectData, result);
+            AddPropertiesForSchema(item as SchemaData, result);
+            AddPropertiesForComponent(item as ComponentData, result);
+            AddPropertiesForComponentTemplate(item as ComponentTemplateData, result);
+            AddPropertiesForPage(item as PageData, result);
+            AddPropertiesForPageTemplate(item as PageTemplateData, result);
+            AddPropertiesForTemplateBuildingBlock(item as TemplateBuildingBlockData, result);
+            AddPropertiesForStructureGroup(item as StructureGroupData, result);
+            AddPropertiesForFolder(item as FolderData, result);
+            AddPropertiesForVirtualFolder(item as VirtualFolderData, result);
+            AddPropertiesForPublication(item as PublicationData, result);
+            AddPropertiesForCategory(item as CategoryData, result);
+            AddPropertiesForKeyword(item as KeywordData, result);
+            AddPropertiesForTargetGroup(item as TargetGroupData, result);
+            AddPropertiesForMultimediaType(item as MultimediaTypeData, result);
+            AddPropertiesForUser(item as UserData, result);
+            AddPropertiesForGroup(item as GroupData, result);
+        }
+
+        private static void AddPropertiesForKeyword(KeywordData keyword, PeekResults result)
+        {
+            if (keyword == null) return;
+
+            result.Description = keyword.Description;
+            result.Key = keyword.Key;
+
+            if (keyword.IsAbstract == true)
+            {
+                result.IsAbstract = Resources.Yes;
+            }
+        }
+
+        private static void AddPropertiesForMultimediaType(MultimediaTypeData multimediaType, PeekResults result)
+        {
+            if (multimediaType == null) return;
+
+            result.MimeType = multimediaType.MimeType;
+            result.FileExtensions = string.Join(", ", multimediaType.FileExtensions);
+        }
+
         private static void AddPropertiesForPage(PageData page, PeekResults result)
         {
             if (page == null) return;
@@ -195,13 +221,53 @@ namespace Alchemy.Plugins.Peek.Controllers
             result.TemplateType = LookUpTemplateType(pageTemplate.TemplateType, ItemType.PageTemplate);
         }
 
-        private void AddPropertiesForTemplateBuildingBlock(TemplateBuildingBlockData templateBuildingBlock, PeekResults result)
+        private static void AddPropertiesForPublication(PublicationData publication, PeekResults result)
         {
-            if (templateBuildingBlock == null) return;
+            if (publication == null) return;
 
-            result.MetadataSchema = LinkResult.From(templateBuildingBlock.MetadataSchema);
-            result.ParametersSchema = LinkResult.From(templateBuildingBlock.ParameterSchema);
-            result.TemplateType = LookUpTemplateType(templateBuildingBlock.TemplateType, ItemType.TemplateBuildingBlock);
+            result.Key = publication.Key;
+            result.PublicationPath = publication.PublicationPath;
+            result.PublicationUrl = publication.PublicationUrl;
+            result.MultimediaPath = publication.MultimediaPath;
+            result.MultimediaUrl = publication.MultimediaUrl;
+            result.WebDavUrl = publication.LocationInfo.WebDavUrl;
+        }
+
+        private void AddPropertiesForRepositoryLocalObject(RepositoryLocalObjectData rlo, PeekResults result)
+        {
+            if (rlo == null) return;
+
+            result.LockedBy = GetLockInfo(rlo);
+            result.MetadataSchema = LinkResult.From(rlo.MetadataSchema);
+            if (rlo.LocationInfo != null)
+            {
+                result.WebDavUrl = rlo.LocationInfo.WebDavUrl;
+            }
+
+            FullVersionInfo versionInfo = rlo.VersionInfo as FullVersionInfo;
+            if (versionInfo != null)
+            {
+                result.Creator = versionInfo.Creator.Title;
+                if (result.RevisionDate != null)
+                {
+                    result.Revisor = versionInfo.Revisor.Title;
+                }
+
+                if (versionInfo.LastVersion != null && versionInfo.LastVersion.Value > 1)
+                {
+                    result.Versions = versionInfo.LastVersion.Value;
+                }
+            }
+        }
+
+        private static void AddPropertiesForSchema(SchemaData schema, PeekResults result)
+        {
+            if (schema == null) return;
+
+            result.Description = schema.Description;
+            result.Namespace = schema.NamespaceUri;
+            result.RootElementName = schema.RootElementName;
+            AddFieldsSummary(schema, result);
         }
 
         private static void AddPropertiesForStructureGroup(StructureGroupData structureGroup, PeekResults result)
@@ -227,65 +293,6 @@ namespace Alchemy.Plugins.Peek.Controllers
             }
         }
 
-        private static void AddPropertiesForFolder(FolderData folder, PeekResults result)
-        {
-            if (folder == null) return;
-
-            result.LinkedSchema = LinkResult.From(folder.LinkedSchema);
-        }
-
-        private static void AddPropertiesForVirtualFolder(VirtualFolderData virtualFolder, PeekResults result)
-        {
-            if (virtualFolder == null) return;
-
-            result.Description = virtualFolder.Description;
-        }
-
-        private static void AddPropertiesForPublication(PublicationData publication, PeekResults result)
-        {
-            if (publication == null) return;
-
-            result.Key = publication.Key;
-            result.PublicationPath = publication.PublicationPath;
-            result.PublicationUrl = publication.PublicationUrl;
-            result.MultimediaPath = publication.MultimediaPath;
-            result.MultimediaUrl = publication.MultimediaUrl;
-            result.WebDavUrl = publication.LocationInfo.WebDavUrl;
-        }
-
-        private static void AddPropertiesForCategory(CategoryData category, PeekResults result)
-        {
-            if (category == null) return;
-
-            result.Description = category.Description;
-            result.XmlName = category.XmlName;
-
-            if (category.UseForNavigation == false)
-            {
-                result.Publishable = Resources.CannotBePublished;
-            }
-
-            if (category.UseForIdentification == true)
-            {
-                result.UseForIdentification = Resources.Yes;
-            }
-
-            result.LinkedSchema = LinkResult.From(category.KeywordMetadataSchema);
-        }
-
-        private static void AddPropertiesForKeyword(KeywordData keyword, PeekResults result)
-        {
-            if (keyword == null) return;
-
-            result.Description = keyword.Description;
-            result.Key = keyword.Key;
-
-            if (keyword.IsAbstract == true)
-            {
-                result.IsAbstract = Resources.Yes;
-            }
-        }
-
         private static void AddPropertiesForTargetGroup(TargetGroupData targetGroup, PeekResults result)
         {
             if (targetGroup == null) return;
@@ -296,12 +303,13 @@ namespace Alchemy.Plugins.Peek.Controllers
             result.Conditions = count > 0 ? count.ToString(CultureInfo.InvariantCulture) : Resources.None;
         }
 
-        private static void AddPropertiesForMultimediaType(MultimediaTypeData multimediaType, PeekResults result)
+        private void AddPropertiesForTemplateBuildingBlock(TemplateBuildingBlockData templateBuildingBlock, PeekResults result)
         {
-            if (multimediaType == null) return;
+            if (templateBuildingBlock == null) return;
 
-            result.MimeType = multimediaType.MimeType;
-            result.FileExtensions = string.Join(", ", multimediaType.FileExtensions);
+            result.MetadataSchema = LinkResult.From(templateBuildingBlock.MetadataSchema);
+            result.ParametersSchema = LinkResult.From(templateBuildingBlock.ParameterSchema);
+            result.TemplateType = LookUpTemplateType(templateBuildingBlock.TemplateType, ItemType.TemplateBuildingBlock);
         }
 
         private void AddPropertiesForUser(UserData user, PeekResults result)
@@ -330,79 +338,38 @@ namespace Alchemy.Plugins.Peek.Controllers
             }
         }
 
-        private void AddPropertiesForGroup(GroupData group, PeekResults result)
+        private static void AddPropertiesForVirtualFolder(VirtualFolderData virtualFolder, PeekResults result)
         {
-            if (group == null) return;
-            result.Description = @group.Description;
+            if (virtualFolder == null) return;
 
-            if (group.GroupMemberships != null)
-            {
-                result.GroupMemberships = GetGroupMembershipSummary(group.GroupMemberships);
-            }
-
-            result.Scope = group.Scope.Length > 0
-                ? Resources.GroupScopeSpecificPublications
-                : Resources.GroupScopeAllPublications;
-        }
-
-        private string GetGroupMembershipSummary(IEnumerable<GroupMembershipData> groupMemberships)
-        {
-            IEnumerable<string> result = groupMemberships.Select(membership => 
-                membership.Scope.Length > 0
-                    ? FormatInvariant(Resources.GroupMembershipSummaryScoped, membership.Group.Title) 
-                    : membership.Group.Title
-                );
-
-            return string.Join(", ", result);
-        }
-
-        private string GetLocaleById(int localeId)
-        {
-            var locale = CultureInfo.GetCultures(CultureTypes.SpecificCultures).FirstOrDefault(l => l.LCID == localeId);
-            return locale != null ? locale.EnglishName : Resources.NotSet;
-        }
-
-        private string GetLanguageById(int languageId)
-        {
-            if (languageId > 0)
-            {
-                var languages = Client.GetTridionLanguages();
-                if (languages != null)
-                {
-                    var language = languages.FirstOrDefault(l => l.LanguageId == languageId);
-                    if (language != null)
-                    {
-                        return language.NativeName;
-                    }
-                }
-            }
-
-            return Resources.NotSet;
+            result.Description = virtualFolder.Description;
         }
 
         #region Helper methods
 
-        private LinkResult GetLockInfo(RepositoryLocalObjectData rlo)
+        private static void AddFieldsSummary(SchemaData schema, PeekResults result)
         {
-            if (rlo.LockInfo == null) return null;
-
-            var result = LinkResult.From(rlo.LockInfo.LockUser);
-            if (result != null)
+            try
             {
-                if (result.Id == Client.GetCurrentUser().Id)
+                XDocument doc = XDocument.Parse(schema.Xsd);
+                const string nameAttr = "name";
+
+                if (!string.IsNullOrWhiteSpace(schema.RootElementName))
                 {
-                    result.Title = Resources.You;
+                    var rootElement = doc.Descendants(schemaFields).FirstOrDefault(e => e.Attribute(nameAttr) != null && e.Attribute(nameAttr).Value == schema.RootElementName);
+                    result.FieldsSummary = GetFieldSummary(rootElement, Resources.None);
                 }
+
+                bool expectFields = (schema.Purpose == SchemaPurpose.Metadata ||
+                                     schema.Purpose == SchemaPurpose.Multimedia ||
+                                     schema.Purpose == SchemaPurpose.Bundle);
+
+                var metadataRoot = doc.Descendants(schemaFields).FirstOrDefault(e => e.Attribute(nameAttr) != null && e.Attribute(nameAttr).Value == "Metadata");
+                result.MetadataFieldsSummary = GetFieldSummary(metadataRoot, expectFields ? Resources.None : null);
             }
-
-            return result;
-        }
-
-        private string LookUpTemplateType(string templateType, ItemType itemType)
-        {
-            var templateTypes = Client.GetListTemplateTypes(itemType);
-            var found = templateTypes != null ? templateTypes.FirstOrDefault(t => t.Name == templateType) : null;
-            return found != null ? found.Title : templateType;
+            catch (System.Xml.XmlException)
+            {
+            }
         }
 
         private static string FormatFileSize(long size)
@@ -435,29 +402,9 @@ namespace Alchemy.Plugins.Peek.Controllers
             return FormatInvariant(resource, readable.ToString("0.##"));
         }
 
-        private static void AddFieldsSummary(SchemaData schema, PeekResults result)
+        private static string FormatInvariant(string format, params object[] args)
         {
-            try
-            {
-                XDocument doc = XDocument.Parse(schema.Xsd);
-                const string nameAttr = "name";
-
-                if (!string.IsNullOrWhiteSpace(schema.RootElementName))
-                {
-                    var rootElement = doc.Descendants(schemaFields).FirstOrDefault(e => e.Attribute(nameAttr) != null && e.Attribute(nameAttr).Value == schema.RootElementName);
-                    result.FieldsSummary = GetFieldSummary(rootElement, Resources.None);
-                }
-
-                bool expectFields = (schema.Purpose == SchemaPurpose.Metadata ||
-                                     schema.Purpose == SchemaPurpose.Multimedia ||
-                                     schema.Purpose == SchemaPurpose.Bundle);
-
-                var metadataRoot = doc.Descendants(schemaFields).FirstOrDefault(e => e.Attribute(nameAttr) != null && e.Attribute(nameAttr).Value == "Metadata");
-                result.MetadataFieldsSummary = GetFieldSummary(metadataRoot, expectFields ? Resources.None : null);
-            }
-            catch (System.Xml.XmlException)
-            {
-            }
+            return string.Format(CultureInfo.InvariantCulture, format, args);
         }
 
         private static string GetFieldSummary(XContainer rootElement, string defaultResult = null)
@@ -485,9 +432,62 @@ namespace Alchemy.Plugins.Peek.Controllers
             return defaultResult;
         }
 
-        private static string FormatInvariant(string format, params object[] args)
+        private static string GetGroupMembershipSummary(IEnumerable<GroupMembershipData> groupMemberships)
         {
-            return string.Format(CultureInfo.InvariantCulture, format, args);
+            IEnumerable<string> result = groupMemberships.Select(membership =>
+                membership.Scope.Length > 0
+                    ? FormatInvariant(Resources.GroupMembershipSummaryScoped, membership.Group.Title)
+                    : membership.Group.Title
+                );
+
+            return string.Join(", ", result);
+        }
+
+        private string GetLanguageById(int languageId)
+        {
+            if (languageId > 0)
+            {
+                var languages = Client.GetTridionLanguages();
+                if (languages != null)
+                {
+                    var language = languages.FirstOrDefault(l => l.LanguageId == languageId);
+                    if (language != null)
+                    {
+                        return language.NativeName;
+                    }
+                }
+            }
+
+            return Resources.NotSet;
+        }
+
+        private static string GetLocaleById(int localeId)
+        {
+            var locale = CultureInfo.GetCultures(CultureTypes.SpecificCultures).FirstOrDefault(l => l.LCID == localeId);
+            return locale != null ? locale.EnglishName : Resources.NotSet;
+        }
+
+        private LinkResult GetLockInfo(RepositoryLocalObjectData rlo)
+        {
+            if (rlo.LockInfo == null) return null;
+
+            var result = LinkResult.From(rlo.LockInfo.LockUser);
+            if (result != null)
+            {
+                if (result.Id == Client.GetCurrentUser().Id)
+                {
+                    result.Title = Resources.You;
+                }
+            }
+
+            return result;
+        }
+
+        private string LookUpTemplateType(string templateType, ItemType itemType)
+        {
+            var templateTypes = Client.GetListTemplateTypes(itemType);
+            var found = templateTypes != null ? templateTypes.FirstOrDefault(t => t.Name == templateType) : null;
+            return found != null ? found.Title : templateType;
         }
 
         #endregion

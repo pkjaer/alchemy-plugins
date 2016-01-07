@@ -17,6 +17,47 @@ Alchemy.Plugins.Peek.Controls.ResizeAnimation.prototype.initialize = function Pe
 	};
 };
 
+Alchemy.Plugins.Peek.Controls.ResizeAnimation.prototype.resize = function Peek$ResizeAnimation$fadeIn(height, width)
+{
+	var self = this;
+	var p = this.properties;
+	var settings = p.animationSettings;
+
+	this.fireEvent("resizing");
+
+	p.heightAnimationComplete = false;
+	p.widthAnimationComplete = false;
+
+	var heightAnimation = {
+		property: "height",
+		to: height + "px",
+		duration: settings.duration,
+		curve: settings.curve,
+		element: p.element,
+		callback: function()
+		{
+			p.heightAnimationComplete = true;
+			self._checkComplete();
+		}
+	};
+
+	var widthAnimation = {
+		property: "width",
+		to: width + "px",
+		duration: settings.duration,
+		curve: settings.curve,
+		element: p.element,
+		callback: function()
+		{
+			p.widthAnimationComplete = true;
+			self._checkComplete();
+		}
+	};
+
+	p.animations.push($animation.add(heightAnimation));
+	p.animations.push($animation.add(widthAnimation));
+};
+
 Alchemy.Plugins.Peek.Controls.ResizeAnimation.prototype.stop = function Peek$ResizeAnimation$stop()
 {
 	var p = this.properties;
@@ -36,46 +77,4 @@ Alchemy.Plugins.Peek.Controls.ResizeAnimation.prototype._checkComplete = functio
 		this.stop();
 		this.fireEvent("resized");
 	}
-}
-
-Alchemy.Plugins.Peek.Controls.ResizeAnimation.prototype.resize = function Peek$ResizeAnimation$fadeIn(height, width)
-{
-	var self = this;
-	var p = this.properties;
-	var settings = p.animationSettings;
-
-	this.fireEvent("resize");
-	p.heightAnimationComplete = false;
-	p.widthAnimationComplete = false;
-
-	var heightAnimation = {
-		property: "height",
-		to: height + "px",
-		duration: settings.duration,
-		curve: settings.curve
-	};
-
-	heightAnimation.element = p.element;
-	heightAnimation.callback = function()
-	{
-		p.heightAnimationComplete = true;
-		self._checkComplete();
-	};
-	p.animations.push($animation.add(heightAnimation));
-
-	var widthAnimation = {
-		property: "width",
-		to: width + "px",
-		duration: settings.duration,
-		curve: settings.curve
-	};
-
-	widthAnimation.element = p.element;
-	widthAnimation.callback = function()
-	{
-		p.widthAnimationComplete = true;
-		self._checkComplete();
-	};
-	p.animations.push($animation.add(widthAnimation));
-	p.widthAnimationComplete = true;
 };

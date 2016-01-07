@@ -22,28 +22,6 @@ Alchemy.Plugins.Peek.Controls.FadeAnimation.prototype.initialize = function Peek
 	};
 };
 
-Alchemy.Plugins.Peek.Controls.FadeAnimation.prototype.stopFadeInAnimation = function Peek$FadeAnimation$stopFadeInAnimation()
-{
-	var p = this.properties;
-
-	for (var i = 0, j = p.fadeInAnimations.length; i < j; i++)
-	{
-		$animation.stop(p.fadeInAnimations[i]);
-	}
-	p.fadeInAnimations = [];
-};
-
-Alchemy.Plugins.Peek.Controls.FadeAnimation.prototype.stopFadeOutAnimation = function Peek$FadeAnimation$stopFadeOutAnimation()
-{
-	var p = this.properties;
-
-	for (var i = 0, j = p.fadeOutAnimations.length; i < j; i++)
-	{
-		$animation.stop(p.fadeOutAnimations[i]);
-	}
-	p.fadeOutAnimations = [];
-};
-
 Alchemy.Plugins.Peek.Controls.FadeAnimation.prototype.fadeIn = function Peek$FadeAnimation$fadeIn(to)
 {
 	var self = this;
@@ -91,3 +69,24 @@ Alchemy.Plugins.Peek.Controls.FadeAnimation.prototype.fadeOut = function Peek$Fa
 	p.fadeOutAnimations.push($animation.add(animation));
 };
 
+Alchemy.Plugins.Peek.Controls.FadeAnimation.prototype.stopFadeInAnimation = function Peek$FadeAnimation$stopFadeInAnimation()
+{
+	var p = this.properties;
+
+	for (var i = 0, j = p.fadeInAnimations.length; i < j; i++)
+	{
+		$animation.stop(p.fadeInAnimations[i]);
+	}
+	p.fadeInAnimations = [];
+};
+
+Alchemy.Plugins.Peek.Controls.FadeAnimation.prototype.stopFadeOutAnimation = function Peek$FadeAnimation$stopFadeOutAnimation()
+{
+	var p = this.properties;
+
+	for (var i = 0, j = p.fadeOutAnimations.length; i < j; i++)
+	{
+		$animation.stop(p.fadeOutAnimations[i]);
+	}
+	p.fadeOutAnimations = [];
+};

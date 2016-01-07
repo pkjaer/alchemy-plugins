@@ -1,6 +1,6 @@
 ﻿Alchemy.command("${PluginName}", "Peek",
 {
-	initialize: function ()
+	initialize : function()
 	{
 		var p = this.properties;
 		if (p.initialized) return;
@@ -8,15 +8,14 @@
 		p.initialized = true;
 	},
 
-	isAvailable: function (selection)
+	isAvailable : function(selection)
 	{
 		return true;
 	},
 
-	isEnabled: function (selection)
+	isEnabled : function(selection)
 	{
 		var p = this.properties;
-
 		var item = this.getSingleSelection(selection);
 
 		if (p.frameManager)
@@ -27,14 +26,16 @@
 		return true;
 	},
 
-	execute: function (selection)
+	execute : function(selection)
 	{
 		var p = this.properties;
 		this.initialize();
-		p.frameManager.toggle(this.getSingleSelection(selection));
+
+		var item = this.getSingleSelection(selection);
+		p.frameManager.toggle(item);
 	},
 
-	getSingleSelection: function (selection)
+	getSingleSelection : function(selection)
 	{
 		$assert.isObject(selection);
 

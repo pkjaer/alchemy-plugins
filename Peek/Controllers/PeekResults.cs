@@ -7,6 +7,7 @@ namespace Alchemy.Plugins.Peek.Controllers
         public LinkResult LockedBy { get; set; }
         public string Description { get; set; }
         public string Key { get; set; }                     // Publication and Keyword
+
         public string XmlName { get; set; }                 // Category
         public string UseForIdentification { get; set; }    // Category
         public string IsAbstract { get; set; }              // Keyword
@@ -15,13 +16,16 @@ namespace Alchemy.Plugins.Peek.Controllers
         public string PublicationUrl { get; set; }          // Publication
         public string MultimediaPath { get; set; }          // Publication
         public string MultimediaUrl { get; set; }           // Publication
+
         public string Directory { get; set; }               // Structure Group
         public string FullDirectory { get; set; }           // Structure Group
         public string Publishable { get; set; }             // Structure Group
+
         public string Namespace { get; set; }               // Schema
         public string RootElementName { get; set; }         // Schema
         public string FieldsSummary { get; set; }           // Schema
         public string MetadataFieldsSummary { get; set; }   // Schema
+
         public string Status { get; set; }                  // User
         public string IsAdministrator { get; set; }         // User
         public string Language { get; set; }                // User
@@ -39,8 +43,8 @@ namespace Alchemy.Plugins.Peek.Controllers
         public string DynamicTemplateInfo { get; set; }     // Templates
         public string Priority { get; set; }                // Component Template
 
-        public string Extension { get; set; }
-        public string FileName { get; set; }
+        public string Extension { get; set; }               // Page Template
+        public string FileName { get; set; }                // Page / Multimedia Component
         public string FileSize { get; set; }                // Multimedia Component
         public string ComponentPresentations { get; set; }  // Page
         public string Conditions { get; set; }              // Target Group
