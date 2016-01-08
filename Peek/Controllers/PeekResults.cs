@@ -60,6 +60,7 @@ namespace Alchemy.Plugins.Peek.Controllers
         public DateTime? RevisionDate { get; set; }
         public string Revisor { get; set; }
         
+        public string PublishPath { get; set; }
         public string WebDavUrl { get; set; }
     }
 }

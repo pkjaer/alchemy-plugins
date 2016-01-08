@@ -198,12 +198,15 @@ namespace Alchemy.Plugins.Peek.Controllers
             result.FileExtensions = string.Join(", ", multimediaType.FileExtensions);
         }
 
-        private static void AddPropertiesForPage(PageData page, PeekResults result)
+        private void AddPropertiesForPage(PageData page, PeekResults result)
         {
             if (page == null) return;
 
+            var template = (PageTemplateData)Client.Read(page.PageTemplate.IdRef, new ReadOptions());
+            string extension = template.FileExtension;
+
             result.Template = LinkResult.From(page.PageTemplate);
-            result.FileName = page.FileName;
+            result.FileName = FormatInvariant("{0}.{1}", page.FileName, extension);
             result.ComponentPresentations = Resources.None;
 
             if (page.ComponentPresentations.Any())
@@ -213,6 +216,11 @@ namespace Alchemy.Plugins.Peek.Controllers
                 result.ComponentPresentations = (templateCount == 1)
                     ? FormatInvariant(Resources.ComponentPresentationSummarySameTemplate, count)
                     : FormatInvariant(Resources.ComponentPresentationSummary, count, templateCount);
+            }
+
+            if (!string.IsNullOrWhiteSpace(result.PublishPath))
+            {
+                result.PublishPath = FormatInvariant("{0}/{1}", result.PublishPath, result.FileName);
             }
         }
 
@@ -288,6 +296,11 @@ namespace Alchemy.Plugins.Peek.Controllers
             if (rlo.LocationInfo != null)
             {
                 result.WebDavUrl = rlo.LocationInfo.WebDavUrl;
+                var publishInfo = (rlo.LocationInfo as PublishLocationInfo);
+                if (publishInfo != null)
+                {
+                    result.PublishPath = publishInfo.PublishPath.Replace(@"\", "/");
+                }
             }
 
             FullVersionInfo versionInfo = rlo.VersionInfo as FullVersionInfo;

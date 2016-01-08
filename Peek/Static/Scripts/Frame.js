@@ -46,6 +46,7 @@ Alchemy.Plugins.Peek.Views.Frame.prototype.initialize = function PeekFrame$initi
 		"Label_priority": "Priority",
 		"Label_publicationUrl": "Publication URL",
 		"Label_publishable": "Publishable",
+		"Label_publishPath": "Publish Path",
 		"Label_revisionDate": "Last modified",
 		"Label_rootElementName": "Root Element",
 		"Label_schema": "Schema",

@@ -126,8 +126,9 @@ h1
     min-width: 110px;
 }
 
-.results tr.webDavUrl .value,
-.results tr.namespace .value
+.results tr.namespace .value,
+.results tr.publishPath .value,
+.results tr.webDavUrl .value
 {
     white-space: normal;
     word-break: break-all;
