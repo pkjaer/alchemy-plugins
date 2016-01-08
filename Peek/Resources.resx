@@ -196,7 +196,7 @@
     <value>Peek</value>
   </data>
   <data name="ToolbarButtonTooltip" xml:space="preserve">
-    <value>Shows a quick view of the selected item without needing to open it.</value>
+    <value>Toggle Peek</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

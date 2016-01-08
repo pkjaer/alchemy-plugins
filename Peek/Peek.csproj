@@ -172,9 +172,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Alchemy4Tridion.Plugin.1.0.0-beta7-0\build\net40\Alchemy4Tridion.Plugin.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Alchemy4Tridion.Plugin.1.0.0-beta7-0\build\net40\Alchemy4Tridion.Plugin.targets'))" />
   </Target>
-  <Target Name="A4TPostBuildEvents" AfterTargets="Build">
-    <Exec Command="powershell -NoProfile -File $(SolutionDir)UploadPlugin.ps1 $(TargetDir)$(TargetName).a4t" />
-  </Target>
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

@@ -295,7 +295,7 @@ namespace Alchemy.Plugins.Peek {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shows a quick view of the selected item without needing to open it..
+        ///   Looks up a localized string similar to Toggle Peek.
         /// </summary>
         internal static string ToolbarButtonTooltip {
             get {
