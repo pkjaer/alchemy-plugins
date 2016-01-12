@@ -15,63 +15,14 @@ Alchemy.Plugins.Peek.Views.Frame.prototype.initialize = function PeekFrame$initi
 		"By": "by {0}",
 		"ClickToOpen": "Click to open '{0}'",
 		"ClickToSuggest": "Click here to make a suggestion.",
-		"Label_componentPresentations": "Component Presentations",
-		"Label_conditions": "Conditions",
-		"Label_creationDate": "Created",
-		"Label_defaultCodePage": "Default Code Page",
-		"Label_description": "Description",
-		"Label_destinations": "Destinations",
-		"Label_directory": "Directory",
-		"Label_dynamicTemplateInfo": "Dynamic",
-		"Label_extension": "Extension",
-		"Label_fieldsSummary": "Fields",
-		"Label_fileExtensions": "File Extensions",
-		"Label_fileName": "File Name",
-		"Label_fileSize": "File Size",
-		"Label_fullDirectory": "Directory (full)",
-		"Label_groupMemberships": "Group Memberships",
-		"Label_id": "ID",
-		"Label_isAbstract": "Abstract",
-		"Label_isAdministrator": "Administrator",
-		"Label_key": "Key",
-		"Label_language": "Language",
-		"Label_linkedSchema": "Linked Schema",
-		"Label_locale": "Regional Settings",
-		"Label_lockedBy": "Locked by",
-		"Label_metadataFieldsSummary": "Metadata Fields",
-		"Label_metadataSchema": "Metadata Schema",
-		"Label_mimeType": "MIME Type",
-		"Label_namespace": "Namespace",
-		"Label_parametersSchema": "Parameters Schema",
-		"Label_priority": "Priority",
-		"Label_publicationUrl": "Publication URL",
-		"Label_publishable": "Publishable",
-		"Label_publishPath": "Publish Path",
-		"Label_revisionDate": "Last modified",
-		"Label_rootElementName": "Root Element",
-		"Label_schema": "Schema",
-		"Label_scope": "Scope",
-		"Label_status": "Status",
-		"Label_targetLanguage": "Target Language",
-		"Label_template": "Template",
-		"Label_templateType": "Template Type",
-		"Label_useForIdentification": "For identification",
-		"Label_versions": "Versions",
-		"Label_webDavUrl": "WebDAV URL",
-		"Label_xmlName": "XML Name",
 		"NothingToSeeHere": "No information available for this item.",
 		"PeekFailed": "Peeking failed: ",
 		"PeekFailedForUnknownReason": "Peek failed for an unknown reason. Is the plugin still installed?",
 		"Peeking": "Peeking...",
 		"SuggestionLink": "https://github.com/pkjaer/alchemy-plugins/labels/Peek",
-		"WindowTitle": "Peek",
-        "Label_multimediaPath": "Multimedia Path",
-        "Label_multimediaUrl": "Multimedia URL",
-        "Label_publicationPath": "Publication Path"
+		"WindowTitle": "Peek"
 	};
 
-	p.ignore = ["revisor", "creator"];
-	p.linkedKeys = {"revisionDate": "revisor", "creationDate": "creator"};
 	p.results = $("#Results");
 	p.error = $("#Error");
 	p.loadingText = $(".loadingText");
@@ -111,11 +62,9 @@ Alchemy.Plugins.Peek.Views.Frame.prototype.close = function PeekFrame$close()
 	this.fireEvent("close");
 };
 
-Alchemy.Plugins.Peek.Views.Frame.prototype.draw = function PeekFrame$draw()
+Alchemy.Plugins.Peek.Views.Frame.prototype.draw = function PeekFrame$draw(data)
 {
 	var p = this.properties;
-	var data = p.data;
-	if (!data) return;
 
 	$css.undisplay(p.loadingText);
 	p.results.innerHTML = "";
@@ -124,38 +73,34 @@ Alchemy.Plugins.Peek.Views.Frame.prototype.draw = function PeekFrame$draw()
 	var empty = true;
 	var table = document.createElement("table");
 
-	for (var key in data)
+	if (data)
 	{
-		var value = data[key];
-		if (!value) continue;
-		if (p.ignore.indexOf(key) > -1) continue;
-
-		empty = false;
-
-		var row = document.createElement("tr");
-		row.className = "result " + key;
-		table.appendChild(row);
-
-		var cell = document.createElement("td");
-		cell.className = "label";
-		$dom.setInnerText(cell, p.resources["Label_" + key] || key);
-		row.appendChild(cell);
-
-		cell = document.createElement("td");
-		cell.className = "value";
-		row.appendChild(cell);
-
-		if (this._isDate(value))
+		for (var key in data)
 		{
-			this._addDateEntry(cell, key, value);
-		} 
-		else if (typeof(value) == "object")
-		{
-			this._addLinkEntry(cell, value);
-		} 
-		else
-		{
-			$dom.setInnerText(cell, value);
+			var entry = data[key];
+			if (!entry) continue;
+
+			empty = false;
+
+			var row = document.createElement("tr");
+			row.className = "result " + key;
+			table.appendChild(row);
+
+			var cell = document.createElement("td");
+			cell.className = "label";
+			$dom.setInnerText(cell, entry.label);
+			row.appendChild(cell);
+
+			cell = document.createElement("td");
+			cell.className = "value";
+			row.appendChild(cell);
+
+			switch (entry.type)
+			{
+				case "date": this._addDateEntry(cell, key, entry); break;
+				case "link": this._addLinkEntry(cell, entry); break;
+				default: $dom.setInnerText(cell, entry.value); break;
+			}
 		}
 	}
 
@@ -306,15 +251,15 @@ Alchemy.Plugins.Peek.Views.Frame.prototype.startPeeking = function PeekFrame$sta
 	);
 };
 
-Alchemy.Plugins.Peek.Views.Frame.prototype._addDateEntry = function PeekFrame$_addDateEntry(cell, key, value)
+Alchemy.Plugins.Peek.Views.Frame.prototype._addDateEntry = function PeekFrame$_addDateEntry(cell, key, entry)
 {
 	var p = this.properties;
-	var date = Tridion.Utils.Date.parse(value);
+	var date = Tridion.Utils.Date.parse(entry.value);
 	var formatted = $localization.getFormattedDateTime(date, Tridion.Runtime.LocaleInfo.fullDateTimeFormat);
 
 	$dom.setInnerText(cell, formatted);
 
-	var by = p.data[p.linkedKeys[key]];
+	var by = entry.user;
 	if (by)
 	{
 		var label = document.createElement("div");
@@ -323,35 +268,25 @@ Alchemy.Plugins.Peek.Views.Frame.prototype._addDateEntry = function PeekFrame$_a
 	}
 };
 
-Alchemy.Plugins.Peek.Views.Frame.prototype._addLinkEntry = function PeekFrame$_addLinkEntry(cell, value)
+Alchemy.Plugins.Peek.Views.Frame.prototype._addLinkEntry = function PeekFrame$_addLinkEntry(cell, entry)
 {
 	var p = this.properties;
 	var c = p.controls;
 
 	var link = document.createElement("div");
 	link.className = "link";
-	link.title = p.resources.ClickToOpen.format(value.title);
-	link.setAttribute("data-uri", value.id);
+	link.title = p.resources.ClickToOpen.format(entry.linkTitle);
+	link.setAttribute("data-uri", entry.linkId);
 
 	var linkText = document.createElement("span");
 	linkText.className = "text";
-	$dom.setInnerText(linkText, value.title);
+	$dom.setInnerText(linkText, entry.linkTitle);
 	link.appendChild(linkText);
 	cell.appendChild(link);
 
 	var button = $controls.getControl(link, "Tridion.Controls.Button");
 	$evt.addEventHandler(button, "click", this.getDelegate(this._onLinkClicked));
 	c.links.push(button);
-};
-
-Alchemy.Plugins.Peek.Views.Frame.prototype._isDate = function PeekFrame$_isDate(value)
-{
-	if (typeof(value) == "string")
-	{
-		var match = value.match(/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+/);
-		return (match != null);
-	}
-	return false;
 };
 
 Alchemy.Plugins.Peek.Views.Frame.prototype._listenToChanges = function PeekFrame$_listenToChanges()
@@ -403,8 +338,7 @@ Alchemy.Plugins.Peek.Views.Frame.prototype._onLinkClicked = function PeekFrame$_
 
 Alchemy.Plugins.Peek.Views.Frame.prototype._onSuccess = function PeekFrame$_onSuccess(result)
 {
-	this.properties.data = result;
-	this.draw();
+	this.draw(result);
 };
 
 Alchemy.Plugins.Peek.Views.Frame.prototype._stopListeningToChanges = function PeekFrame$_stopListeningToChanges()

@@ -162,6 +162,138 @@
   <data name="GroupScopeSpecificPublications" xml:space="preserve">
     <value>Specific Publications</value>
   </data>
+  <data name="LabelComponentPresentations" xml:space="preserve">
+    <value>Component Presentations</value>
+  </data>
+  <data name="LabelConditions" xml:space="preserve">
+    <value>Conditions</value>
+  </data>
+  <data name="LabelCreationDate" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="LabelDefaultCodePage" xml:space="preserve">
+    <value>Default Code Page</value>
+  </data>
+  <data name="LabelDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LabelDestinations" xml:space="preserve">
+    <value>Destinations</value>
+  </data>
+  <data name="LabelDirectory" xml:space="preserve">
+    <value>Directory</value>
+  </data>
+  <data name="LabelDynamicTemplateInfo" xml:space="preserve">
+    <value>Dynamic</value>
+  </data>
+  <data name="LabelExtension" xml:space="preserve">
+    <value>Extension</value>
+  </data>
+  <data name="LabelFieldsSummary" xml:space="preserve">
+    <value>Fields</value>
+  </data>
+  <data name="LabelFileExtensions" xml:space="preserve">
+    <value>File Extensions</value>
+  </data>
+  <data name="LabelFileName" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="LabelFileSize" xml:space="preserve">
+    <value>File Size</value>
+  </data>
+  <data name="LabelGroupMemberships" xml:space="preserve">
+    <value>Group Memberships</value>
+  </data>
+  <data name="LabelID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="LabelIsAbstract" xml:space="preserve">
+    <value>Abstract</value>
+  </data>
+  <data name="LabelIsAdministrator" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="LabelKey" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="LabelLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LabelLinkedSchema" xml:space="preserve">
+    <value>Linked Schema</value>
+  </data>
+  <data name="LabelLocale" xml:space="preserve">
+    <value>Regional Settings</value>
+  </data>
+  <data name="LabelLockedBy" xml:space="preserve">
+    <value>Locked by</value>
+  </data>
+  <data name="LabelMetadataFieldsSummary" xml:space="preserve">
+    <value>Metadata Fields</value>
+  </data>
+  <data name="LabelMetadataSchema" xml:space="preserve">
+    <value>Metadata Schema</value>
+  </data>
+  <data name="LabelMimeType" xml:space="preserve">
+    <value>MIME Type</value>
+  </data>
+  <data name="LabelNamespace" xml:space="preserve">
+    <value>Namespace</value>
+  </data>
+  <data name="LabelParametersSchema" xml:space="preserve">
+    <value>Parameters Schema</value>
+  </data>
+  <data name="LabelPriority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="LabelPublicationUrl" xml:space="preserve">
+    <value>Publication URL</value>
+  </data>
+  <data name="LabelPublishable" xml:space="preserve">
+    <value>Publishable</value>
+  </data>
+  <data name="LabelPathOnWebsite" xml:space="preserve">
+    <value>Path on website</value>
+  </data>
+  <data name="LabelRevisionDate" xml:space="preserve">
+    <value>Last modified</value>
+  </data>
+  <data name="LabelRootElementName" xml:space="preserve">
+    <value>Root Element</value>
+  </data>
+  <data name="LabelSchema" xml:space="preserve">
+    <value>Schema</value>
+  </data>
+  <data name="LabelScope" xml:space="preserve">
+    <value>Scope</value>
+  </data>
+  <data name="LabelStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="LabelTargetLanguage" xml:space="preserve">
+    <value>Target Language</value>
+  </data>
+  <data name="LabelTemplate" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="LabelTemplateType" xml:space="preserve">
+    <value>Template Type</value>
+  </data>
+  <data name="LabelUseForIdentification" xml:space="preserve">
+    <value>For identification</value>
+  </data>
+  <data name="LabelVersions" xml:space="preserve">
+    <value>Versions</value>
+  </data>
+  <data name="LabelWebDavUrl" xml:space="preserve">
+    <value>WebDAV URL</value>
+  </data>
+  <data name="LabelXmlName" xml:space="preserve">
+    <value>XML Name</value>
+  </data>
+  <data name="MissingItemUri" xml:space="preserve">
+    <value>The item URI parameter has not been specified.</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>None</value>
   </data>
@@ -203,5 +335,14 @@
   </data>
   <data name="You" xml:space="preserve">
     <value>You</value>
+  </data>
+  <data name="LabelMultimediaPath" xml:space="preserve">
+    <value>Multimedia Path</value>
+  </data>
+  <data name="LabelMultimediaUrl" xml:space="preserve">
+    <value>Multimedia URL</value>
+  </data>
+  <data name="LabelPublicationPath" xml:space="preserve">
+    <value>Publication Path</value>
   </data>
 </root>

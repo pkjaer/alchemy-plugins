@@ -196,6 +196,429 @@ namespace Alchemy.Plugins.Peek {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Component Presentations.
+        /// </summary>
+        internal static string LabelComponentPresentations {
+            get {
+                return ResourceManager.GetString("LabelComponentPresentations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conditions.
+        /// </summary>
+        internal static string LabelConditions {
+            get {
+                return ResourceManager.GetString("LabelConditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        internal static string LabelCreationDate {
+            get {
+                return ResourceManager.GetString("LabelCreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Code Page.
+        /// </summary>
+        internal static string LabelDefaultCodePage {
+            get {
+                return ResourceManager.GetString("LabelDefaultCodePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string LabelDescription {
+            get {
+                return ResourceManager.GetString("LabelDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Destinations.
+        /// </summary>
+        internal static string LabelDestinations {
+            get {
+                return ResourceManager.GetString("LabelDestinations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Directory.
+        /// </summary>
+        internal static string LabelDirectory {
+            get {
+                return ResourceManager.GetString("LabelDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dynamic.
+        /// </summary>
+        internal static string LabelDynamicTemplateInfo {
+            get {
+                return ResourceManager.GetString("LabelDynamicTemplateInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extension.
+        /// </summary>
+        internal static string LabelExtension {
+            get {
+                return ResourceManager.GetString("LabelExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fields.
+        /// </summary>
+        internal static string LabelFieldsSummary {
+            get {
+                return ResourceManager.GetString("LabelFieldsSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Extensions.
+        /// </summary>
+        internal static string LabelFileExtensions {
+            get {
+                return ResourceManager.GetString("LabelFileExtensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Name.
+        /// </summary>
+        internal static string LabelFileName {
+            get {
+                return ResourceManager.GetString("LabelFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Size.
+        /// </summary>
+        internal static string LabelFileSize {
+            get {
+                return ResourceManager.GetString("LabelFileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group Memberships.
+        /// </summary>
+        internal static string LabelGroupMemberships {
+            get {
+                return ResourceManager.GetString("LabelGroupMemberships", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        internal static string LabelID {
+            get {
+                return ResourceManager.GetString("LabelID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abstract.
+        /// </summary>
+        internal static string LabelIsAbstract {
+            get {
+                return ResourceManager.GetString("LabelIsAbstract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Administrator.
+        /// </summary>
+        internal static string LabelIsAdministrator {
+            get {
+                return ResourceManager.GetString("LabelIsAdministrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key.
+        /// </summary>
+        internal static string LabelKey {
+            get {
+                return ResourceManager.GetString("LabelKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string LabelLanguage {
+            get {
+                return ResourceManager.GetString("LabelLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linked Schema.
+        /// </summary>
+        internal static string LabelLinkedSchema {
+            get {
+                return ResourceManager.GetString("LabelLinkedSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regional Settings.
+        /// </summary>
+        internal static string LabelLocale {
+            get {
+                return ResourceManager.GetString("LabelLocale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locked by.
+        /// </summary>
+        internal static string LabelLockedBy {
+            get {
+                return ResourceManager.GetString("LabelLockedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metadata Fields.
+        /// </summary>
+        internal static string LabelMetadataFieldsSummary {
+            get {
+                return ResourceManager.GetString("LabelMetadataFieldsSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Metadata Schema.
+        /// </summary>
+        internal static string LabelMetadataSchema {
+            get {
+                return ResourceManager.GetString("LabelMetadataSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MIME Type.
+        /// </summary>
+        internal static string LabelMimeType {
+            get {
+                return ResourceManager.GetString("LabelMimeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multimedia Path.
+        /// </summary>
+        internal static string LabelMultimediaPath {
+            get {
+                return ResourceManager.GetString("LabelMultimediaPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multimedia URL.
+        /// </summary>
+        internal static string LabelMultimediaUrl {
+            get {
+                return ResourceManager.GetString("LabelMultimediaUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Namespace.
+        /// </summary>
+        internal static string LabelNamespace {
+            get {
+                return ResourceManager.GetString("LabelNamespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameters Schema.
+        /// </summary>
+        internal static string LabelParametersSchema {
+            get {
+                return ResourceManager.GetString("LabelParametersSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path on website.
+        /// </summary>
+        internal static string LabelPathOnWebsite {
+            get {
+                return ResourceManager.GetString("LabelPathOnWebsite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priority.
+        /// </summary>
+        internal static string LabelPriority {
+            get {
+                return ResourceManager.GetString("LabelPriority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publication Path.
+        /// </summary>
+        internal static string LabelPublicationPath {
+            get {
+                return ResourceManager.GetString("LabelPublicationPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publication URL.
+        /// </summary>
+        internal static string LabelPublicationUrl {
+            get {
+                return ResourceManager.GetString("LabelPublicationUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publishable.
+        /// </summary>
+        internal static string LabelPublishable {
+            get {
+                return ResourceManager.GetString("LabelPublishable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last modified.
+        /// </summary>
+        internal static string LabelRevisionDate {
+            get {
+                return ResourceManager.GetString("LabelRevisionDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Root Element.
+        /// </summary>
+        internal static string LabelRootElementName {
+            get {
+                return ResourceManager.GetString("LabelRootElementName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schema.
+        /// </summary>
+        internal static string LabelSchema {
+            get {
+                return ResourceManager.GetString("LabelSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scope.
+        /// </summary>
+        internal static string LabelScope {
+            get {
+                return ResourceManager.GetString("LabelScope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string LabelStatus {
+            get {
+                return ResourceManager.GetString("LabelStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target Language.
+        /// </summary>
+        internal static string LabelTargetLanguage {
+            get {
+                return ResourceManager.GetString("LabelTargetLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template.
+        /// </summary>
+        internal static string LabelTemplate {
+            get {
+                return ResourceManager.GetString("LabelTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template Type.
+        /// </summary>
+        internal static string LabelTemplateType {
+            get {
+                return ResourceManager.GetString("LabelTemplateType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For identification.
+        /// </summary>
+        internal static string LabelUseForIdentification {
+            get {
+                return ResourceManager.GetString("LabelUseForIdentification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Versions.
+        /// </summary>
+        internal static string LabelVersions {
+            get {
+                return ResourceManager.GetString("LabelVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebDAV URL.
+        /// </summary>
+        internal static string LabelWebDavUrl {
+            get {
+                return ResourceManager.GetString("LabelWebDavUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XML Name.
+        /// </summary>
+        internal static string LabelXmlName {
+            get {
+                return ResourceManager.GetString("LabelXmlName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The item URI parameter has not been specified..
+        /// </summary>
+        internal static string MissingItemUri {
+            get {
+                return ResourceManager.GetString("MissingItemUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
         internal static string None {
