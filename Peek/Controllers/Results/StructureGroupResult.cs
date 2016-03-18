@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Alchemy.Plugins.Peek.Controllers.Entries;
+﻿using Alchemy.Plugins.Peek.Controllers.Entries;
 using Newtonsoft.Json;
 using Tridion.ContentManager.CoreService.Client;
 
