@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin xmlns:c="https://www.alchemywebstore.com/configuration/definitions" xmlns="http://www.alchemywebstore.com/">
+  <name>Recent</name>
+  <description><![CDATA[Keep track of recently viewed or edited items and let you re-open them quickly.]]></description>
+  <references />
+  <frameworkVersion>0.8.3.0</frameworkVersion>
+</plugin>
